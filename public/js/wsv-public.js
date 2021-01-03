@@ -1,32 +1,44 @@
 (function( $ ) {
 	'use strict';
+    $(document).ready(function () {
+		$('.wsv_quantity').on("change", function () {
+			var product_qty = $(this).val();
+			var product_id = $(this).prop('placeholder');
+			var add_cart = $('.wsv-add-to-cart-'+product_id);
+			add_cart.attr('data-quantity', product_qty);
+		});
 
-	/**
-	 * All of the code for your public-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+		$('.wsv-add-to-cart').click( function ( e ) {
+			e.preventDefault();
+			$(this).addClass('loading');
+			var product_id = $(this).attr('data-product_id');
+			var product_qty = $(this).attr('data-quantity');
+			$.ajax({
+				url: ajaxurl,
+				type: "POST",
+				data: {
+				  'action': 'wsv_add_product_to_cart',
+				  'product_id': product_id,
+				  'product_qty': product_qty,
+				},
+				success: function()
+				{
+					$('.wsv-add-to-cart').removeClass('loading');
+					jQuery(document.body).trigger('wc_fragment_refresh');
+				}
+			});
+		});
+
+		$('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": false,
+            language: { search: '', searchPlaceholder: "Search" },
+        });
+	})
 
 })( jQuery );
