@@ -172,6 +172,7 @@ class Wsv {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_public, 'add_wsv_menu' );
 		$this->loader->add_action( 'woocommerce_shortcode_products_query', $plugin_public, 'show_variations_by_shortcode' );
 		$this->loader->add_action( 'woocommerce_after_single_product_summary', $plugin_public, 'get_variations_table' );
 		$this->loader->add_action( 'wp_ajax_wsv_add_product_to_cart', $plugin_public, 'add_product_to_cart' );

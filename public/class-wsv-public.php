@@ -103,6 +103,38 @@ class Wsv_Public {
 
 	}
 
+	public function add_wsv_menu() {
+		add_options_page( 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'get_settings_page' ) );
+	}
+
+	public static function get_settings_page() {
+		if ( ( isset( $_POST, $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
+			wsv_update_option( $_POST );
+		}
+		$wsv_settings = get_option( 'm-wsv-settings');
+		?>
+			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php _e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
+			<form method="POST">
+				<div class="col-md-2 form-check">
+					<strong>
+						<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
+					</strong>
+					<input type="checkbox" <?php 
+					if ( $wsv_settings && array_key_exists( 'wsv_enable_var_table_show', $wsv_settings ) ) {
+						echo ( ( 'yes' === $wsv_settings['wsv_enable_var_table_show'] ) ? 'checked' : '' );
+					}
+					?>
+					name="wsv_enable_var_table_show" class="form-check-input" value="yes" id="wsv_enable_var_table_show" /><br />
+					<small class="form-text text-muted">
+						<?php //_e( 'this option will display the list of variations of a variable product on that product\'s page', 'wsv' ); ?>
+					</small>
+				</div>
+				<input type="hidden" name="securite_nonce" value="<?php echo esc_html( wp_create_nonce( 'wsv_securite' ) ); ?>"/>
+				<span ><?php  submit_button(); ?></span>
+			</form>
+		</div>
+		<?php
+	}
 
 	public static function show_variations_by_shortcode( $query_args ) {
 		// $query_args['post_type'] = array( 'product', 'product_variation' );
@@ -112,6 +144,10 @@ class Wsv_Public {
 
 
 	public static function get_variations_table() {
+		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show');
+		if ( 'yes' !== $wsv_enable_var_table_show ) {
+			return;
+		}
 		global $product;
 		$id = $product->get_id();
 
