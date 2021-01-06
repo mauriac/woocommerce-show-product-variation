@@ -106,6 +106,7 @@ class Wsv_Admin {
 			wsv_update_option( $_POST );
 		}
 		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
+		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
 		?>
 			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php _e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
 			<form method="POST">
@@ -134,8 +135,17 @@ class Wsv_Admin {
 						</th>
 						<td>
 							<select name="wsv_show_vari_on_shop_cat">
-								<option value="NO"></option>
-								<option value="SP" selected>
+								<option value="NO"
+									<?php
+										echo ( ( 'NO' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+									?>
+									>
+								</option>
+								<option value="SP" 
+									<?php
+										echo ( ( 'SP' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+									?>
+									>
 									<?php _e( 'Single Product', 'wsv' ); ?>
 								</option>
 							</select>
