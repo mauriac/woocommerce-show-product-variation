@@ -44,13 +44,13 @@ class Wsv_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -102,28 +102,49 @@ class Wsv_Admin {
 
 	public static function get_settings_page() {
 		if ( ( isset( $_POST, $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
+			isset( $_POST['wsv_enable_var_table_show'] ) ? : $_POST['wsv_enable_var_table_show'] = null;
 			wsv_update_option( $_POST );
 		}
-		$wsv_settings = get_option( 'm-wsv-settings');
+		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
 		?>
 			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php _e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
 			<form method="POST">
-				<div class="col-md-2 form-check">
-					<strong>
-						<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
-					</strong>
-					<input type="checkbox" <?php 
-					if ( $wsv_settings && array_key_exists( 'wsv_enable_var_table_show', $wsv_settings ) ) {
-						echo ( ( 'yes' === $wsv_settings['wsv_enable_var_table_show'] ) ? 'checked' : '' );
-					}
-					?>
-					name="wsv_enable_var_table_show" class="form-check-input" value="yes" id="wsv_enable_var_table_show" /><br />
-					<small class="form-text text-muted">
-						<?php //_e( 'this option will display the list of variations of a variable product on that product\'s page', 'wsv' ); ?>
-					</small>
-				</div>
+
+			<table>
+				<tr>
+					<th scope="row">
+						<strong>
+							<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
+						</strong>
+					</th>
+					<td>
+						<input type="checkbox" 
+						<?php
+							echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
+						?>
+						name="wsv_enable_var_table_show" class="form-check-input" id="wsv_enable_var_table_show" /><br />
+					</td>
+				</tr>
+				<tr>
+					<div class="col-auto my-1">
+						<th scope="row">
+							<strong>
+								<?php _e( 'Show Variations On Shop & Category As', 'wsv' ); ?>
+							</strong>
+						</th>
+						<td>
+							<select name="wsv_show_vari_on_shop_cat">
+								<option value="NO"></option>
+								<option value="SP" selected>
+									<?php _e( 'Single Product', 'wsv' ); ?>
+								</option>
+							</select>
+						</td>
+					</div>
+				</tr>
+			</table>
 				<input type="hidden" name="securite_nonce" value="<?php echo esc_html( wp_create_nonce( 'wsv_securite' ) ); ?>"/>
-				<span ><?php  submit_button(); ?></span>
+				<span ><?php submit_button(); ?></span>
 			</form>
 		</div>
 		<?php

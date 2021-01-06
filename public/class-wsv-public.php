@@ -112,7 +112,7 @@ class Wsv_Public {
 
 	public static function get_variations_table() {
 		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show');
-		if ( 'yes' !== $wsv_enable_var_table_show ) {
+		if ( ! $wsv_enable_var_table_show ) {
 			return;
 		}
 		global $product;
