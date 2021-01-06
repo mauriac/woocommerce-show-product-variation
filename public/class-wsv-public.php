@@ -129,7 +129,7 @@ class Wsv_Public {
 							<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 							<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
 							<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
-							<th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+							<th class="product-subtotal"><?php esc_html_e( 'Add to cart', 'woocommerce' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -191,7 +191,7 @@ class Wsv_Public {
 									<td>
 										<a href="?add-to-cart=<?php echo $var_id; ?>" data-quantity = "1" 
 											class="button wsv-add-to-cart wsv-add-to-cart-<?php echo $var_id; ?>" 
-											data-product_id="<?php echo $var_id; ?>"> Add to cart</a>
+											data-product_id="<?php echo $var_id; ?>"> <?php esc_attr_e( 'Add to cart', 'woocommerce' ); ?></a>
 									</td>
 								</tr>
 								<?php
