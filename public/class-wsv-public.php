@@ -210,4 +210,10 @@ class Wsv_Public {
 		WC()->cart->add_to_cart( $product_id, $product_qty );
 	}
 
+	public function product_query( $q ) {
+		if ( 'SP' === get_option('wsv_show_vari_on_shop_cat') ) {
+			$q->set( 'post_type', array( 'product', 'product_variation' ) );
+		}
+		return $q;
+	}
 }
