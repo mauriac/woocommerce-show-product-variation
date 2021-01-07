@@ -74,7 +74,7 @@ class Wsv_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wsv-public.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'wsv-dataTables-min', 'https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'wsv-dataTables-min', plugin_dir_url( __FILE__ ) . 'css/datatables.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -97,7 +97,7 @@ class Wsv_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'wsv-datatables-min', 'https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'wsv-datatables-min', plugin_dir_url( __FILE__ ) . 'js/datatables.min.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wsv-public.js', array( 'jquery' ), $this->version, false );
 		wp_localize_script( $this->plugin_name, 'ajaxurl', admin_url( 'admin-ajax.php' ) );
 
