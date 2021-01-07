@@ -44,13 +44,13 @@ class Wsv_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of the plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -111,7 +111,7 @@ class Wsv_Public {
 
 
 	public static function get_variations_table() {
-		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show');
+		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
 		if ( ! $wsv_enable_var_table_show ) {
 			return;
 		}
@@ -138,7 +138,7 @@ class Wsv_Public {
 							$variation = wc_get_product( $var_id );
 
 							if ( $variation && $variation->exists() ) {
-								$product_permalink = $variation->is_visible() ? $variation->get_permalink( ) : '';
+								$product_permalink = $variation->is_visible() ? $variation->get_permalink() : '';
 								?>
 								<tr >
 
@@ -157,11 +157,11 @@ class Wsv_Public {
 
 									<td class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
 										<?php
-											if ( ! $product_permalink ) {
-												echo wp_kses_post( $variation->get_formatted_name() );
-											} else {
-												echo wp_kses_post( sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $variation->get_formatted_name() ) );
-											}
+										if ( ! $product_permalink ) {
+											echo wp_kses_post( $variation->get_formatted_name() );
+										} else {
+											echo wp_kses_post( sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $variation->get_formatted_name() ) );
+										}
 										?>
 									</td>
 
@@ -173,17 +173,17 @@ class Wsv_Public {
 
 									<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
 										<?php
-											if ( $variation->is_sold_individually() ) {
-												$product_quantity = sprintf( '1 <input type="hidden" class="wsv_quantity" name="wsv-quantity" value="1" />' );
-											} else {
-												$product_quantity = woocommerce_quantity_input(
-													array(
-														'input_name'   => "wsv-quantity",
-														'classes'   => "wsv_quantity",
-														'placeholder'   => $var_id,
-													)
-												);
-											}
+										if ( $variation->is_sold_individually() ) {
+											$product_quantity = sprintf( '1 <input type="hidden" class="wsv_quantity" name="wsv-quantity" value="1" />' );
+										} else {
+											$product_quantity = woocommerce_quantity_input(
+												array(
+													'input_name'   => 'wsv-quantity',
+													'classes'   => 'wsv_quantity',
+													'placeholder'   => $var_id,
+												)
+											);
+										}
 											echo $product_quantity;
 										?>
 									</td>
@@ -211,7 +211,7 @@ class Wsv_Public {
 	}
 
 	public function product_query( $q ) {
-		if ( 'SP' === get_option('wsv_show_vari_on_shop_cat') ) {
+		if ( 'sp' === get_option( 'wsv_show_vari_on_shop_cat' ) ) {
 			$q->set( 'post_type', array( 'product', 'product_variation' ) );
 		}
 		return $q;

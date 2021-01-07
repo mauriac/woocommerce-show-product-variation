@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -101,9 +100,11 @@ class Wsv_Admin {
 	}
 
 	public static function get_settings_page() {
-		if ( ( isset( $_POST, $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
-			isset( $_POST['wsv_enable_var_table_show'] ) ? : $_POST['wsv_enable_var_table_show'] = null;
-			wsv_update_option( $_POST );
+		if ( ( isset( $_POST['wsv-settings'], $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
+			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
+				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
+			}
+			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
 		}
 		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
@@ -123,30 +124,30 @@ class Wsv_Admin {
 						<?php
 							echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
 						?>
-						name="wsv_enable_var_table_show" class="form-check-input" id="wsv_enable_var_table_show" /><br />
+						name="wsv-settings[wsv_enable_var_table_show]" class="form-check-input" id="wsv_enable_var_table_show" /><br />
 					</td>
 				</tr>
 				<tr>
 					<div class="col-auto my-1">
 						<th scope="row">
 							<strong>
-								<?php _e( 'Show Variations On Shop & Category As', 'wsv' ); ?>
+								<?php esc_attr_e( 'Show Variations On Shop & Category As', 'wsv' ); ?>
 							</strong>
 						</th>
 						<td>
-							<select name="wsv_show_vari_on_shop_cat">
-								<option value="NO"
+							<select name="wsv-settings[wsv_show_vari_on_shop_cat]">
+								<option value="no"
 									<?php
-										echo ( ( 'NO' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										echo ( ( 'no' == $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
 									?>
 									>
 								</option>
-								<option value="SP" 
+								<option value="sp" 
 									<?php
-										echo ( ( 'SP' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										echo ( ( 'sp' == $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
 									?>
 									>
-									<?php _e( 'Single Product', 'wsv' ); ?>
+									<?php esc_attr_e( 'Single Product', 'wsv' ); ?>
 								</option>
 							</select>
 						</td>
