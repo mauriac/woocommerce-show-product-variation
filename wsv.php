@@ -13,9 +13,9 @@
  * @package           Wsv
  *
  * @wordpress-plugin
- * Plugin Name:       Woocommerce Show Product Variations
+ * Plugin Name:       Show Product Variations For Woocommerce
  * Plugin URI:        #
- * Description:       display the variations of your variable products easily
+ * Description:       Display the variations of your variable products easily
  * Version:           1.0.0
  * Author:            FLINIMI
  * Author URI:        azouamauriac@gmail.com
