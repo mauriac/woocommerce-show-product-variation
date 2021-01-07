@@ -116,6 +116,9 @@ class Wsv_Public {
 			return;
 		}
 		global $product;
+		if ( 'variable' !== $product->get_type() || ! $product->has_child() ) {
+			return;
+		}
 		$id = $product->get_id();
 
 		$product = wc_get_product( $id );
