@@ -159,16 +159,23 @@ class Wsv_Admin {
 							<select name="wsv-settings[wsv_show_vari_on_shop_cat]">
 								<option value="no"
 									<?php
-										echo ( ( 'no' == $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										echo ( ( 'no' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
 									?>
 									>
 								</option>
 								<option value="sp" 
 									<?php
-										echo ( ( 'sp' == $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										echo ( ( 'sp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
 									?>
 									>
 									<?php esc_attr_e( 'Single Product', 'wsv' ); ?>
+								</option>
+								<option value="dp" 
+									<?php
+										echo ( ( 'dp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+									?>
+									>
+									<?php esc_attr_e( 'Dropdown', 'wsv' ); ?>
 								</option>
 							</select>
 						</td>

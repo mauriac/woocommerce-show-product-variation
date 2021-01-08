@@ -180,6 +180,7 @@ class Wsv {
 		$this->loader->add_action( 'wp_ajax_nopriv_wsv_add_product_to_cart', $plugin_public, 'add_product_to_cart' );
 		$this->loader->add_action( 'woocommerce_product_query', $plugin_public, 'product_query' );
 
+		$this->loader->add_filter( 'woocommerce_loop_add_to_cart_link', $plugin_public, 'display_variation_as_dropdown', 10, 2 );
 	}
 
 	/**
