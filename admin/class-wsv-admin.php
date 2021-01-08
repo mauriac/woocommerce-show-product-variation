@@ -99,6 +99,17 @@ class Wsv_Admin {
 
 	}
 
+	public function is_woocommerce_enabled() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			add_action( 'admin_notices', array( $this, 'get_woocommerce_disabled_notice' ) );
+			return;
+		}
+	}
+
+	public function get_woocommerce_disabled_notice() {
+		echo '<div class="error"><p><strong>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</strong> ' . sprintf(__('requires %sWooCommerce%s to be installed & activated!', 'wsv'), '<a href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>') . '</p></div>';
+	}
+
 	public static function get_settings_page() {
 		if ( ( isset( $_POST['wsv-settings'], $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
 			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
