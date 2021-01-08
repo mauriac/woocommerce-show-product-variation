@@ -116,6 +116,16 @@ class Wsv_Admin {
 				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
 			}
 			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
+
+			?>
+			<div class="wad notice notice-success is-dismissible">
+				<p>
+					<?php
+						echo '<b>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</b>' . sprintf( __( ': Data saved successful!', 'wsv' ) );
+					?>
+				</p>
+			</div>
+			<?php
 		}
 		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
