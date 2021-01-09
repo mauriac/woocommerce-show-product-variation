@@ -192,4 +192,75 @@ class Wsv_Admin {
 	public function add_wsv_menu() {
 		add_options_page( 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'get_settings_page' ) );
 	}
+
+	public function get_product_tab_data() {
+		?>
+		<div id='wsv_tab_content' class='panel woocommerce_options_panel'>
+			<div class='options_group'>
+				<?php
+					woocommerce_wp_checkbox(
+						array(
+							'id'          => WSV_EXCEPT_SING_VARI,
+							'label'       => __( 'Exclude Single Variation', 'wsv' ),
+							'description' => __( 'This option will exclude single variation on shop & category pages.', 'wsv' ),
+						)
+					);
+					woocommerce_wp_checkbox(
+						array(
+							'id'          => WSV_EXC_PROD_PAR,
+							'label'       => __( 'Hide Parent Variable Product', 'wsv' ),
+							'description' => __( 'Enable this option to Hide parent variation on shop & category pages.<br/><strong>Note: this option will be not work for Show Variations Dropdown</strong>', 'wsv' ),
+						)
+					);
+				?>
+		</div>
+	</div>
+		<?php
+	}
+	public function get_product_tab_label( $tabs ) {
+		if ( ! is_array( $tabs ) ) {
+			return;
+		}
+		$tabs['wsv_tab'] = array(
+			'label'  => __( 'Show Variations', 'wsv' ),
+			'target' => 'wsv_tab_content',
+			'class'  => array(),
+		);
+		return $tabs;
+	}
+
+	public function save_post( $post_id ) {
+		$product = wc_get_product( $post_id );
+
+		if ( 'variable' !== $product->get_type() ) {
+			return;
+		}
+		$wsv_exc_vari   = get_option( WSV_EXCEPT_SING_VARI );
+		$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
+		$wsv_exc_vari   = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
+		$wsv_exc_parent = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
+
+		if ( isset( $_POST[ WSV_EXCEPT_SING_VARI ] ) ) {
+			$vars_id                  = $product->get_children();
+			$wsv_exc_vari[ $post_id ] = $vars_id;
+			update_post_meta( $post_id, WSV_EXCEPT_SING_VARI, 'yes' );
+		} else {
+			$wsv_exc_vari[ $post_id ] = array();
+			update_post_meta( $post_id, WSV_EXCEPT_SING_VARI, 'no' );
+		}
+		update_option( WSV_EXCEPT_SING_VARI, $wsv_exc_vari );
+
+		if ( isset( $_POST[ WSV_EXC_PROD_PAR ] ) ) {
+			$wsv_exc_parent[] = $post_id;
+			update_post_meta( $post_id, WSV_EXC_PROD_PAR, 'yes' );
+		} else {
+			$key = array_search( $post_id, $wsv_exc_parent, true );
+			if ( $key !== false ) {
+				unset( $wsv_exc_parent[ $key ] );
+			}
+			update_post_meta( $post_id, WSV_EXC_PROD_PAR, 'no' );
+		}
+		$wsv_exc_parent = array_unique( $wsv_exc_parent );
+		update_option( WSV_EXC_PROD_PAR, $wsv_exc_parent );
+	}
 }

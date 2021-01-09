@@ -216,6 +216,18 @@ class Wsv_Public {
 	public function product_query( $q ) {
 		if ( 'sp' === get_option( 'wsv_show_vari_on_shop_cat' ) ) {
 			$q->set( 'post_type', array( 'product', 'product_variation' ) );
+			$wsv_exc_vari   = get_option( WSV_EXCEPT_SING_VARI );
+			$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
+			$wsv_exc_vari   = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
+			$wsv_exc_parent = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
+			$excl_vari = array();
+			foreach ( $wsv_exc_vari as $value ) {
+				if ( is_array( $value ) ) {
+					$excl_vari = isset( $excl_vari ) ? array_merge( $excl_vari, $value ) : $value;
+				}
+			}
+			$excl_vari = isset( $wsv_exc_parent ) ? array_merge($excl_vari, $wsv_exc_parent ) : $excl_vari;
+			$q->set( 'post__not_in', $excl_vari + $wsv_exc_parent );
 		}
 		return $q;
 	}
