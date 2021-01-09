@@ -232,7 +232,7 @@ class Wsv_Public {
 		return $q;
 	}
 
-	public function display_variation_as_dropdown ( $add_to_cart_html, $product ) {
+	public function display_variation_as_dropdown( $add_to_cart_html, $product ) {
 		if ( 'dp' !== get_option( 'wsv_show_vari_on_shop_cat' ) || 'variable' !== $product->get_type() || ! $product->has_child() ) {
 			return $add_to_cart_html;
 		}
@@ -262,9 +262,9 @@ class Wsv_Public {
 									<?php
 										wc_dropdown_variation_attribute_options(
 											array(
-												'options'   => $options,
+												'options' => $options,
 												'attribute' => $attribute_name,
-												'product'   => $product,
+												'product' => $product,
 											)
 										);
 										echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) ) : '';

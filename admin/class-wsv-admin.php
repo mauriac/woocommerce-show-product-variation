@@ -107,7 +107,7 @@ class Wsv_Admin {
 	}
 
 	public function get_woocommerce_disabled_notice() {
-		echo '<div class="error"><p><strong>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</strong> ' . sprintf(__('requires %sWooCommerce%s to be installed & activated!', 'wsv'), '<a href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>') . '</p></div>';
+		echo '<div class="error"><p><strong>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</strong> ' . sprintf( __( 'requires %1$sWooCommerce%2$s to be installed & activated!', 'wsv' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>' ) . '</p></div>';
 	}
 
 	public static function get_settings_page() {

@@ -184,9 +184,6 @@ class Wsv {
 		$this->loader->add_action( 'woocommerce_product_query', $plugin_public, 'product_query' );
 
 		$this->loader->add_filter( 'woocommerce_loop_add_to_cart_link', $plugin_public, 'display_variation_as_dropdown', 10, 2 );
-
-		// $this->loader->add_action( 'woocommerce_before_template_part', $plugin_public, 'prepare_product_template_loop_data', 99, 4 );
-		// $this->loader->add_action( 'woocommerce_before_shop_loop', $plugin_public, 'get_loop_data' );
 	}
 
 	/**
