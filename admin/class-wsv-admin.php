@@ -130,58 +130,58 @@ class Wsv_Admin {
 		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
 		?>
+		<div class="wrap">
 			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php _e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
 			<form method="POST">
-
-			<table>
-				<tr>
-					<th scope="row">
-						<strong>
-							<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
-						</strong>
-					</th>
-					<td>
-						<input type="checkbox" 
-						<?php
-							echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
-						?>
-						name="wsv-settings[wsv_enable_var_table_show]" class="form-check-input" id="wsv_enable_var_table_show" /><br />
-					</td>
-				</tr>
-				<tr>
-					<div class="col-auto my-1">
+				<table class="form-table">
+					<tr valign="top">
 						<th scope="row">
 							<strong>
-								<?php esc_attr_e( 'Show Variations On Shop & Category As', 'wsv' ); ?>
+								<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
 							</strong>
 						</th>
 						<td>
-							<select name="wsv-settings[wsv_show_vari_on_shop_cat]">
-								<option value="no"
-									<?php
-										echo ( ( 'no' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
-									?>
-									>
-								</option>
-								<option value="sp" 
-									<?php
-										echo ( ( 'sp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
-									?>
-									>
-									<?php esc_attr_e( 'Single Product', 'wsv' ); ?>
-								</option>
-								<option value="dp" 
-									<?php
-										echo ( ( 'dp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
-									?>
-									>
-									<?php esc_attr_e( 'Dropdown', 'wsv' ); ?>
-								</option>
-							</select>
+							<input type="checkbox" 
+							<?php
+								echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
+							?>
+							name="wsv-settings[wsv_enable_var_table_show]" class="form-check-input" id="wsv_enable_var_table_show" /><br />
 						</td>
-					</div>
-				</tr>
-			</table>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<strong>
+									<?php esc_attr_e( 'Show Variations On Shop & Category As', 'wsv' ); ?>
+								</strong>
+							</th>
+							<td>
+								<select name="wsv-settings[wsv_show_vari_on_shop_cat]">
+									<option value="no"
+										<?php
+											echo ( ( 'no' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										?>
+										>
+									</option>
+									<option value="sp" 
+										<?php
+											echo ( ( 'sp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										?>
+										>
+										<?php esc_attr_e( 'Single Product', 'wsv' ); ?>
+									</option>
+									<option value="dp" 
+										<?php
+											echo ( ( 'dp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
+										?>
+										>
+										<?php esc_attr_e( 'Dropdown', 'wsv' ); ?>
+									</option>
+								</select>
+							</td>
+						</div>
+					</tr>
+				</table>
 				<input type="hidden" name="securite_nonce" value="<?php echo esc_html( wp_create_nonce( 'wsv_securite' ) ); ?>"/>
 				<span ><?php submit_button(); ?></span>
 			</form>
@@ -190,7 +190,7 @@ class Wsv_Admin {
 	}
 
 	public function add_wsv_menu() {
-		add_options_page( 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'get_settings_page' ) );
+		add_submenu_page('woocommerce', 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'get_settings_page' ) );
 	}
 
 	public function get_product_tab_data() {
