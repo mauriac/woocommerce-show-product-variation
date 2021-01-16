@@ -162,6 +162,7 @@ class Wsv {
 		$this->loader->add_filter( 'woocommerce_product_data_tabs', $plugin_admin, 'get_product_tab_label' );
 		$this->loader->add_action( 'woocommerce_product_data_panels', $plugin_admin, 'get_product_tab_data' );
 		$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'save_post' );
+		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'footer_credits', 10, 1 );
 	}
 
 	/**

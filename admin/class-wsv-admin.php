@@ -263,4 +263,12 @@ class Wsv_Admin {
 		$wsv_exc_parent = array_unique( $wsv_exc_parent );
 		update_option( WSV_EXC_PROD_PAR, $wsv_exc_parent );
 	}
+
+	public function footer_credits( $text ){
+		$screen = get_current_screen();
+		if ( 'woocommerce_page_wsv' === $screen->base ) {
+			$text = sprintf( __('If you like %1$s please leave us a %2$s rating or some reviews.This will make happy %3$s.','woo-wsv'),	sprintf( '<strong>%s</strong>', WSV_PLUGIN_NAME ),'<a href="https://wordpress.org/support/plugin/show-product-variations-for-woocommerce/reviews/#new-post" target="_blank" class="wc-rating-link" data-rated="' . esc_attr__( 'Thanks :)', 'woo-wsv' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>', sprintf( '<strong>%s</strong>', esc_html__( 'FLINM', 'woo-wsv' ) ) );
+		}
+		return $text;
+	}
 }
