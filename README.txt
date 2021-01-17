@@ -40,8 +40,8 @@ You can also display variations as single product on shop and category.
 
 == Screenshots ==
 
-1. variations_tables
-2. wsv-shop
+1. variations tables
+2. variations on shop
 
 == Changelog ==
 
