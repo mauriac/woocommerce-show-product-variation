@@ -275,6 +275,13 @@ class Wsv_Admin {
 							'description' => __( 'Enable this option to Hide parent variation on shop & category pages.<br/><strong>Note: this option will be not work for Show Variations Dropdown</strong>', 'wsv' ),
 						)
 					);
+					woocommerce_wp_checkbox(
+						array(
+							'id'          => WSV_EXC_PROD_TABLE,
+							'label'       => __( 'Hide Variations Table', 'wsv' ),
+							'description' => __( 'Enable this option to Hide variations table on this product page.', 'wsv' ),
+						)
+					);
 				?>
 		</div>
 	</div>
@@ -298,10 +305,13 @@ class Wsv_Admin {
 		if ( 'variable' !== $product->get_type() ) {
 			return;
 		}
-		$wsv_exc_vari   = get_option( WSV_EXCEPT_SING_VARI );
-		$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
-		$wsv_exc_vari   = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
-		$wsv_exc_parent = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
+		$wsv_exc_vari        = get_option( WSV_EXCEPT_SING_VARI );
+		$wsv_exc_parent      = get_option( WSV_EXC_PROD_PAR );
+		$wsv_exc_varia_table = get_option( WSV_EXC_PROD_TABLE );
+
+		$wsv_exc_vari        = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
+		$wsv_exc_parent      = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
+		$wsv_exc_varia_table = is_array( $wsv_exc_varia_table ) ? $wsv_exc_varia_table : array();
 
 		if ( isset( $_POST[ WSV_EXCEPT_SING_VARI ] ) ) {
 			$vars_id                  = $product->get_children();
@@ -325,6 +335,19 @@ class Wsv_Admin {
 		}
 		$wsv_exc_parent = array_unique( $wsv_exc_parent );
 		update_option( WSV_EXC_PROD_PAR, $wsv_exc_parent );
+
+		if ( isset( $_POST[ WSV_EXC_PROD_TABLE ] ) ) {
+			$wsv_exc_varia_table[] = $post_id;
+			update_post_meta( $post_id, WSV_EXC_PROD_TABLE, 'yes' );
+		} else {
+			$key = array_search( $post_id, $wsv_exc_varia_table, true );
+			if ( $key !== false ) {
+				unset( $wsv_exc_varia_table[ $key ] );
+			}
+			update_post_meta( $post_id, WSV_EXC_PROD_TABLE, 'no' );
+		}
+		$wsv_exc_varia_table = array_unique( $wsv_exc_varia_table );
+		update_option( WSV_EXC_PROD_TABLE, $wsv_exc_varia_table );
 	}
 
 	public function footer_credits( $text ) {

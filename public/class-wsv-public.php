@@ -121,6 +121,11 @@ class Wsv_Public {
 		}
 		$id = $product->get_id();
 
+		$exclude_prod_table_list = (array) get_option( WSV_EXC_PROD_TABLE );
+		if ( in_array($id, $exclude_prod_table_list, true ) ) {
+			return;
+		}
+
 		$product = wc_get_product( $id );
 		$vars_id = $product->get_children();
 		?>
