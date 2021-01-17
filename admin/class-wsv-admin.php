@@ -110,7 +110,11 @@ class Wsv_Admin {
 		echo '<div class="error"><p><strong>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</strong> ' . sprintf( __( 'requires %1$sWooCommerce%2$s to be installed & activated!', 'wsv' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>' ) . '</p></div>';
 	}
 
-	public static function get_settings_page() {
+	public function add_wsv_menu() {
+		add_submenu_page( 'woocommerce', 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'configure_settings_page' ) );
+	}
+
+	public static function get_single_variation_settings_page() {
 		if ( ( isset( $_POST['wsv-settings'], $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
 			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
 				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
@@ -127,27 +131,11 @@ class Wsv_Admin {
 			</div>
 			<?php
 		}
-		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
 		?>
 		<div class="wrap">
-			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php _e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
 			<form method="POST">
 				<table class="form-table">
-					<tr valign="top">
-						<th scope="row">
-							<strong>
-								<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
-							</strong>
-						</th>
-						<td>
-							<input type="checkbox" 
-							<?php
-								echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
-							?>
-							name="wsv-settings[wsv_enable_var_table_show]" class="form-check-input" id="wsv_enable_var_table_show" /><br />
-						</td>
-					</tr>
 					<tr valign="top">
 						<div class="col-auto my-1">
 							<th scope="row">
@@ -189,8 +177,83 @@ class Wsv_Admin {
 		<?php
 	}
 
-	public function add_wsv_menu() {
-		add_submenu_page( 'woocommerce', 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'get_settings_page' ) );
+	public static function get_variable_table_settings_page() {
+		if ( ( isset( $_POST['wsv-settings'], $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
+			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
+				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
+			}
+			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
+
+			?>
+			<div class="wad notice notice-success is-dismissible">
+				<p>
+					<?php
+						echo '<b>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</b>' . sprintf( __( ': Data saved successful!', 'wsv' ) );
+					?>
+				</p>
+			</div>
+			<?php
+		}
+		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
+		?>
+		<div class="wrap">
+			<form method="POST">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row">
+							<strong>
+								<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
+							</strong>
+						</th>
+						<td>
+							<input type="checkbox" 
+							<?php
+								echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
+							?>
+							name="wsv-settings[wsv_enable_var_table_show]" class="form-check-input" id="wsv_enable_var_table_show" /><br />
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="securite_nonce" value="<?php echo esc_html( wp_create_nonce( 'wsv_securite' ) ); ?>"/>
+				<span ><?php submit_button(); ?></span>
+			</form>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Function for configure Ultimate SMS Notifications settings.
+	 */
+	public function configure_settings_page() {
+		?>
+		<?php
+		if ( isset( $_GET['tab'] ) ) {
+			$active_tab = $_GET['tab'];
+		} else {
+			$active_tab = 'variations-options';
+		}
+		?>
+		<div class="wrap">
+			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php esc_html_e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
+			<h2 class="nav-tab-wrapper">
+				<a href="?page=wsv&tab=variations-options"  class="nav-tab <?php echo 'variations-options' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Single Variation Options', 'wsv' ); ?></a>
+				<a href="?page=wsv&tab=table-settings"  class="nav-tab <?php echo 'table-settings' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Variable Product Table', 'wsv' ); ?></a>
+			</h2>
+				<?php
+				if ( 'variations-options' === $active_tab ) {
+					?>
+				<div class="woousn-options-tab">
+					<?php
+						$this->get_single_variation_settings_page();
+					?>
+		</div>
+					<?php
+				} elseif ( 'table-settings' === $active_tab ) {
+					$this->get_variable_table_settings_page();
+				}
+				?>
+		</div>
+		<?php
 	}
 
 	public function get_product_tab_data() {
