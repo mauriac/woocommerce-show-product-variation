@@ -161,9 +161,9 @@ class Wsv_Public {
 									<td class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
 										<?php
 										if ( ! $product_permalink ) {
-											echo wp_kses_post( $variation->get_formatted_name() );
+											echo wp_kses_post( $variation->get_name() );
 										} else {
-											echo wp_kses_post( sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $variation->get_formatted_name() ) );
+											echo wp_kses_post( sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $variation->get_name() ) );
 										}
 										?>
 									</td>
