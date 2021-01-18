@@ -5,7 +5,9 @@ Tags: woocommerce, variations, table, variations table, woocommerce variable, va
 Requires at least: 3.0.1
 Tested up to: 5.6
 Requires PHP: 7.0
-Stable tag: 1.1.0
+WC requires at least: 3.0.0
+WC tested up to: 4.9.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +47,9 @@ You can also display variations as single product on shop and category.
 
 == Changelog ==
 
+= 1.2.0 =
+* Hide the variation table for a specific variable product.
+
 = 1.1.0 =
 * Display variable product as dropdown on shop and category.
 * Exclude variations on shop and category.
@@ -52,12 +57,12 @@ You can also display variations as single product on shop and category.
 = 1.0.0 =
 * This is first version.
 
-== Upgrade Notice ==
-
-= 1.0 =
-* This is first version.
-
 == Feedback ==
 
 We are developing this plugin for you. 
-If you discover a bug, you need a feature or have any idea to, let us know by posting your suggestion on the plugin reviews page https://wordpress.org/support/plugin/show-product-variations-for-woocommerce/reviews/#new-post
+If you discover a bug, you need a feature or have any idea to, let us know by posting your suggestion on the plugin reviews page [Reviews](https://wordpress.org/support/plugin/show-product-variations-for-woocommerce/reviews/#new-post)
+
+**COMING SOON**
+- Add custom name for variations.
+- Custom variation table design.
+- Use shortcode to display variations tables.
