@@ -11,20 +11,21 @@ Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Woocoomerce plugin to display variations on the shop and category page; show a table of all the available variations of a variable product, and more.
+Display variations as single product or show variations dropdown on shop and category page; display table of all available variations of a variable product, and more.
 
 == Description ==
 
 Show Product Variations For Woocommerce is Woocoomerce plugin to manage the display of variations, including the following:
 <ul>
 <li>Show Variations As Single Product On Shop & Category</li>
+<li>Show Variations Dropdown On Shop & Category</li>
 <li>Display variations as table on variable product page using datatable</li>
 <li>Search variations by typing search keywords</li>
 <li>Each variation will have its own "add to cart" button and this button uses AJAX so no reload needed to add it to cart </li>
 <li>Add custom name for variation</li>
 </ul>
 
-== Upgrading from 1.0.0 ==
+== Upgrading from 1.2.1 ==
 It's completely safe to upgrade from last release, there is no breaking changes, just cleaner code and new features.
 
 == Installation ==
