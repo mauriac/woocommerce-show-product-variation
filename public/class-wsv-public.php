@@ -122,7 +122,7 @@ class Wsv_Public {
 		$id = $product->get_id();
 
 		$exclude_prod_table_list = (array) get_option( WSV_EXC_PROD_TABLE );
-		if ( in_array($id, $exclude_prod_table_list, true ) ) {
+		if ( in_array( $id, $exclude_prod_table_list, true ) ) {
 			return;
 		}
 
@@ -300,5 +300,13 @@ class Wsv_Public {
 			<?php endif; ?>
 		</form>
 		<?php
+	}
+
+	public function display_product_title( $name, $product ) {
+		$custom_name = get_post_meta( $product->get_id(), 'wsv_custom_name', true );
+		if ( $custom_name ) {
+			return $custom_name;
+		}
+		return $name;
 	}
 }

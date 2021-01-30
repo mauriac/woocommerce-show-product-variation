@@ -357,4 +357,24 @@ class Wsv_Admin {
 		}
 		return $text;
 	}
+
+	public function add_custom_field_to_variations( $loop, $variation_data, $variation_post ) {
+		woocommerce_wp_text_input(
+			array(
+				'id'            => 'wsv_custom_name[' . $variation_post->ID . ']',
+				'name'          => 'wsv_custom_name[' . $variation_post->ID . ']',
+				'label'         => __( 'Custom Name(' . WSV_PLUGIN_NAME . ' ) ', 'wsv' ),
+				'value'         => get_post_meta( $variation_post->ID, 'wsv_custom_name', true ),
+				'desc_tip'      => true,
+				'description'   => __( 'Add custom name for this variation', 'wsv' ),
+				'type'          => 'text',
+				'wrapper_class' => 'form-row form-row-full',
+			)
+		);
+	}
+
+	public function save_custom_field_variations( $variation_id ) {
+		$custom_field = $_POST['wsv_custom_name'][ $variation_id ];
+		update_post_meta( $variation_id, 'wsv_custom_name', esc_attr( $custom_field ) );
+	}
 }

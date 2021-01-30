@@ -163,6 +163,9 @@ class Wsv {
 		$this->loader->add_action( 'woocommerce_product_data_panels', $plugin_admin, 'get_product_tab_data' );
 		$this->loader->add_action( 'woocommerce_process_product_meta', $plugin_admin, 'save_post' );
 		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'footer_credits', 10, 1 );
+
+		$this->loader->add_action( 'woocommerce_product_after_variable_attributes', $plugin_admin, 'add_custom_field_to_variations', 99, 3 );
+		$this->loader->add_action( 'woocommerce_save_product_variation', $plugin_admin, 'save_custom_field_variations', 10, 2 );
 	}
 
 	/**
@@ -185,6 +188,7 @@ class Wsv {
 		$this->loader->add_action( 'woocommerce_product_query', $plugin_public, 'product_query' );
 
 		$this->loader->add_filter( 'woocommerce_loop_add_to_cart_link', $plugin_public, 'display_variation_as_dropdown', 10, 2 );
+		$this->loader->add_filter( 'woocommerce_product_variation_title', $plugin_public, 'display_product_title', 10, 2 );
 	}
 
 	/**
