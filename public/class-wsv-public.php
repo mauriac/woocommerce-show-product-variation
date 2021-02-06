@@ -232,7 +232,26 @@ class Wsv_Public {
 				}
 			}
 			$excl_vari = isset( $wsv_exc_parent ) ? array_merge( $excl_vari, $wsv_exc_parent ) : $excl_vari;
-			$q->set( 'post__not_in', $excl_vari + $wsv_exc_parent );
+			if ( is_product_category() ) {
+				$products = wc_get_products( $q->query_vars );
+				if ( ! empty( $products ) ) {
+					$products_id = array_map(
+						function( $o ) {
+							return $o->get_id();
+						},
+						(array) $products
+					);
+					foreach ( (array) $products as $prod ) {
+						if ( 'variable' === $prod->get_type() ) {
+							$products_id = array_merge( $products_id, $prod->get_children() );
+						}
+					}
+					$q->set( 'product_cat', array() );
+					$q->set( 'post__in', array_diff( $products_id, $excl_vari ) );
+				}
+			} else {
+				$q->set( 'post__not_in', $excl_vari );
+			}
 		}
 		return $q;
 	}
