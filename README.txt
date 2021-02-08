@@ -1,13 +1,13 @@
-=== Show Product Variations For Woocommerce ===
+=== Show Variations For Woocommerce ===
 Contributors: azouamauriac
 Donate link: #
-Tags: woocommerce, variations, product, table, variations table, woocommerce variable, variable product, WooCommerce product variations, AJAX, AJAX add to cart, variations list,Show Variations On Shop & Category WooCommerce
+Tags: variations, product, table, datatable, variations table, show variations, woocommerce variable, variable product, WooCommerce product variations, AJAX, AJAX add to cart, variations list,Show Variations On Shop & Category WooCommerce
 Requires at least: 3.0.1
 Tested up to: 5.6
 Requires PHP: 7.0
 WC requires at least: 3.0.0
-WC tested up to: 4.9.0
-Stable tag: 1.2.1
+WC tested up to: 4.9.2
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,7 @@ Show Product Variations For Woocommerce is Woocoomerce plugin to manage the disp
 <li>Add custom name for variation</li>
 </ul>
 
-== Upgrading from 1.2.1 ==
+== Upgrading from 1.2.2 ==
 It's completely safe to upgrade from last release, there is no breaking changes, just cleaner code and new features.
 
 == Installation ==
@@ -48,6 +48,9 @@ You can also display variations as single product on shop and category.
 2. variations on shop
 
 == Changelog ==
+
+= 1.2.2 =
+* Fix Variations not display on category page
 
 = 1.2.1 =
 * Add Custom name to variation.
