@@ -235,6 +235,14 @@ class Wsv_Admin {
 		?>
 		<div class="wrap">
 			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php esc_html_e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
+			<div>
+				<p>
+					<?php printf( esc_html__( 'Thank you for using our plugin! Would you please show us a little love by rating us in the WordPress.org? %s ', 'wsv' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
+					<br/>
+					<a href="<?php echo esc_url( WSV_REVIEWS ); ?>"
+						target="_blank"><?php esc_html_e( 'Reviews', 'wsv' ); ?></a>
+				</p>
+			</div>
 			<h2 class="nav-tab-wrapper">
 				<a href="?page=wsv&tab=variations-options"  class="nav-tab <?php echo 'variations-options' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Single Variation Options', 'wsv' ); ?></a>
 				<a href="?page=wsv&tab=table-settings"  class="nav-tab <?php echo 'table-settings' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Variable Product Table', 'wsv' ); ?></a>
