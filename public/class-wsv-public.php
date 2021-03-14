@@ -104,7 +104,10 @@ class Wsv_Public {
 	}
 
 	public static function show_variations_by_shortcode( $query_args ) {
-		// $query_args['post_type'] = array( 'product', 'product_variation' );
+		$wsv_show_vari_on_shortcode = get_option( 'wsv_show_vari_on_shortcode' );
+		if ( $wsv_show_vari_on_shortcode ) {
+			$query_args['post_type'] = array( 'product', 'product_variation' );
+		}
 
 		return $query_args;
 	}

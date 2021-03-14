@@ -119,6 +119,9 @@ class Wsv_Admin {
 			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
 				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
 			}
+			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_on_shortcode'] ) ) {
+				$_POST['wsv-settings']['wsv_show_vari_on_shortcode'] = null;
+			}
 			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
 
 			?>
@@ -132,6 +135,7 @@ class Wsv_Admin {
 			<?php
 		}
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
+		$wsv_show_vari_on_shortcode = get_option( 'wsv_show_vari_on_shortcode' );
 		?>
 		<div class="wrap">
 			<form method="POST">
@@ -166,6 +170,24 @@ class Wsv_Admin {
 										<?php esc_attr_e( 'Dropdown', 'wsv' ); ?>
 									</option>
 								</select>
+							</td>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<strong>
+									<?php esc_attr_e( 'Show variations in shortcodes', 'wsv' ); ?>
+								</strong>
+							</th>
+							<td>
+								<div class="form-check">
+									<input name="wsv-settings[wsv_show_vari_on_shortcode]" type="checkbox" class="form-check-input" id="exampleCheck1"
+										<?php
+											echo ( ( 'on' === $wsv_show_vari_on_shortcode ) ? 'checked' : ' ' );
+										?>
+									>
+								</div>
 							</td>
 						</div>
 					</tr>
