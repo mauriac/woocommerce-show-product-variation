@@ -37,7 +37,13 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'WSV_VERSION', '1.3.0' );
 define( 'WSV_PLUGIN_NAME', 'Show Product Variations For Woocommerce' );
+/**
+ * Designates the label of variation that will be excluded.
+ */
 define( 'WSV_EXCEPT_SING_VARI', 'wsv_except_single_variation' );
+/**
+ * Designates the label variable product(the parent) that will be excluded.
+ */
 define( 'WSV_EXC_PROD_PAR', 'wsv_exclude_product_parent' );
 /**
  * Designates the label of variation that user have selected and will be excluded.
