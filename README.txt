@@ -3,11 +3,11 @@ Contributors: azouamauriac
 Donate link: #
 Tags: woocommerce, woo, wpc, single, dropdown, variation, variable, product, table, datatable, variations table, show variations, woocommerce variable, variable product, WooCommerce product variations, AJAX, AJAX add to cart, variations list,Show Variations On Shop & Category WooCommerce
 Requires at least: 3.0.1
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 7.0
 WC requires at least: 3.0.0
 WC tested up to: 5.1.0
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,7 @@ Show Product Variations For Woocommerce is Woocoomerce plugin to manage the disp
 <ul>
 <li>Show Variations As Single Product On Catalog Pages (shop, category, tag, search)</li>
 <li>Show Variations Dropdown On Shop & Category</li>
+<li>Show Variations In Shortcodes</li>
 <li>Display variations as table on variable product page using datatable</li>
 <li>Search variations by typing search keywords</li>
 <li>Each variation will have its own "add to cart" button and this button uses AJAX so no reload needed to add it to cart </li>
@@ -48,6 +49,9 @@ You can also display variations as single product on shop and category.
 2. variations on shop
 
 == Changelog ==
+
+= 1.4.0 =
+* Show variations in woocommerce shortcodes
 
 = 1.3.0 =
 * Add reviews box

@@ -16,7 +16,7 @@
  * Plugin Name:       Show Variations For Woocommerce
  * Plugin URI:        #
  * Description:       Display variations as single product or show variations dropdown on shop and category page; show table of all available variations of a variable product, and more.
- * Version:           1.3.0
+ * Version:           1.4.0
  * Author:            FLINIMI
  * Author URI:        azouamauriac@gmail.com
  * License:           GPL-2.0+
