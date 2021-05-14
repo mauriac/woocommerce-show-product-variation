@@ -7,7 +7,7 @@ Tested up to: 5.7
 Requires PHP: 7.0
 WC requires at least: 3.0.0
 WC tested up to: 5.1.0
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,7 @@ Display variations as single product or show variations dropdown on shop and cat
 Show Product Variations For Woocommerce is Woocoomerce plugin to manage the display of variations, including the following:
 <ul>
 <li>Show Variations As Single Product On Catalog Pages (shop, category, tag, search)</li>
+<li>Choose which variations to display</li>
 <li>Show Variations Dropdown On Shop & Category</li>
 <li>Show Variations In Shortcodes</li>
 <li>Display variations as table on variable product page using datatable</li>
@@ -49,6 +50,8 @@ You can also display variations as single product on shop and category.
 2. variations on shop
 
 == Changelog ==
+= 1.5.0 =
+* Choose which variations to display
 
 = 1.4.0 =
 * Show variations in woocommerce shortcodes
