@@ -343,12 +343,22 @@ class Wsv_Admin {
 		$wsv_exc_parent      = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
 		$wsv_exc_varia_table = is_array( $wsv_exc_varia_table ) ? $wsv_exc_varia_table : array();
 
+		$vars_id                  = $product->get_children();
 		if ( isset( $_POST[ WSV_EXCEPT_SING_VARI ] ) ) {
-			$vars_id                  = $product->get_children();
 			$wsv_exc_vari[ $post_id ] = $vars_id;
 			update_post_meta( $post_id, WSV_EXCEPT_SING_VARI, 'yes' );
 		} else {
-			$wsv_exc_vari[ $post_id ] = array();
+			foreach ( $vars_id as $var_id ) {
+				$hide_variation = get_post_meta( $var_id, WSV_HIDE_VARIATION, true );
+				if ( 'yes' !== $hide_variation ) {
+					$wsv_exc_vari[ $post_id ] = array_unique( $wsv_exc_vari[ $post_id ] );
+
+					$key = array_search( $var_id, $wsv_exc_vari[ $post_id ], false );
+					if ( false !== $key ) {
+						unset( $wsv_exc_vari[ $post_id ][ $key ] );
+					}
+				}
+			}
 			update_post_meta( $post_id, WSV_EXCEPT_SING_VARI, 'no' );
 		}
 		update_option( WSV_EXCEPT_SING_VARI, $wsv_exc_vari );
@@ -401,10 +411,47 @@ class Wsv_Admin {
 				'wrapper_class' => 'form-row form-row-full',
 			)
 		);
+
+		woocommerce_wp_checkbox( array( // Checkbox.
+			'id'          => 'wsv_hide_variation[' . $variation_post->ID . ']',
+			'name'        => 'wsv_hide_variation[' . $variation_post->ID . ']',
+			'label'       =>  __( 'Hide this variation(' . WSV_PLUGIN_NAME . ' ) ', 'wsv' ),
+			'value'       => get_post_meta( $variation_post->ID, WSV_HIDE_VARIATION, true ),
+			'description' => __( 'Enable this will hide variation on shop and categorie page.', 'woocommerce' ),
+			'desc_tip'      => true,
+		) );
 	}
 
 	public function save_custom_field_variations( $variation_id ) {
 		$custom_field = $_POST['wsv_custom_name'][ $variation_id ];
+
+		$hide_variation = $_POST[ WSV_HIDE_VARIATION ][ $variation_id ];
+
+		$variation    = wc_get_product($variation_id);
+		$parent_id    = $variation->get_parent_id();
+
+		$wsv_exc_vari   = get_option( WSV_EXCEPT_SING_VARI );
+		$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
+
+		if ( ! in_array( $parent_id, $wsv_exc_parent, true ) ) {
+			if ( 'yes' === $hide_variation ) {
+				$wsv_exc_vari[ $parent_id ][] = $variation_id;
+				$wsv_exc_vari[ $parent_id ]   = array_unique( $wsv_exc_vari[ $parent_id ] );
+			} else {
+				// if the variation is not chosen and its id is in the products to be excluded then it is removed from the table.
+				if ( is_array( $wsv_exc_vari ) && array_key_exists( $parent_id, $wsv_exc_vari ) && is_array( $wsv_exc_vari[ $parent_id ] ) ) {
+					$wsv_exc_vari[ $parent_id ] = array_unique( $wsv_exc_vari[ $parent_id ] );
+
+					$key = array_search( $variation_id, $wsv_exc_vari[ $parent_id ], false );
+					if ( false !== $key ) {
+						unset( $wsv_exc_vari[ $parent_id ][ $key ] );
+					}
+				}
+			}
+			update_option( WSV_EXCEPT_SING_VARI, $wsv_exc_vari );
+		}
+
 		update_post_meta( $variation_id, 'wsv_custom_name', esc_attr( $custom_field ) );
+		update_post_meta( $variation_id, WSV_HIDE_VARIATION, $hide_variation );
 	}
 }

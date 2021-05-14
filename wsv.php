@@ -39,6 +39,11 @@ define( 'WSV_VERSION', '1.3.0' );
 define( 'WSV_PLUGIN_NAME', 'Show Product Variations For Woocommerce' );
 define( 'WSV_EXCEPT_SING_VARI', 'wsv_except_single_variation' );
 define( 'WSV_EXC_PROD_PAR', 'wsv_exclude_product_parent' );
+/**
+ * Designates the label of variation that user have selected and will be excluded.
+ */
+define( 'WSV_HIDE_VARIATION', 'wsv_hide_variation' );
+
 define( 'WSV_EXC_PROD_TABLE', 'wsv_exclude_product_table' );
 define( 'WSV_REVIEWS', 'https://wordpress.org/plugins/show-product-variations-for-woocommerce/#reviews' );
 
