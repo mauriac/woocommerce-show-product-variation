@@ -225,6 +225,28 @@ class Wsv_Public {
 		if ( 'sp' === get_option( 'wsv_show_vari_on_shop_cat' ) ) {
 			$q->set( 'post_type', array( 'product', 'product_variation' ) );
 			$wsv_exc_vari   = get_option( WSV_EXCEPT_SING_VARI );
+			$wsv_excludes_attributes = get_option( 'wsv_excludes_attributes' );
+
+			$variation_products = wc_get_products( array(
+				'type' => 'variation',
+				'limit' => -1,
+			) );
+			if ( is_array( $variation_products ) ) {
+				foreach ( $variation_products as $variation) {
+					$variation_attributes = $variation->get_attributes();
+					if ( is_array( $wsv_excludes_attributes ) ) {
+						foreach ( $wsv_excludes_attributes as $excl_attribute_val ) {
+							if ( isset( $variation_attributes[ $excl_attribute_val ] ) && ! empty( $variation_attributes[ $excl_attribute_val ] ) ) {
+								if ( ! is_array( $wsv_exc_vari ) ) {
+									$wsv_exc_vari = array();
+								}
+								$wsv_exc_vari[ $variation->get_parent_id() ][] = $variation->get_id();
+							}
+						}
+					}
+				}
+			}
+
 			$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
 			$wsv_exc_vari   = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
 			$wsv_exc_parent = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();

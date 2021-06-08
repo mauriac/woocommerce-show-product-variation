@@ -122,6 +122,9 @@ class Wsv_Admin {
 			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_on_shortcode'] ) ) {
 				$_POST['wsv-settings']['wsv_show_vari_on_shortcode'] = null;
 			}
+			if ( ! isset( $_POST['wsv-settings']['wsv_excludes_attributes'] ) ) {
+				$_POST['wsv-settings']['wsv_excludes_attributes'] = null;
+			}
 			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
 
 			?>
@@ -134,8 +137,30 @@ class Wsv_Admin {
 			</div>
 			<?php
 		}
+
+		$variable_products = wc_get_products( array(
+			'type'  => 'variable',
+			'limit' => -1,
+			)
+		);
+		$attributes_values = array();
+
+		$all_attributes = array_map(
+			function( $o ) {
+				$attributes = $o->get_attributes();
+
+				return array_keys( $attributes );
+			},
+			$variable_products
+		);
+		foreach ($all_attributes as $attributes_array) {
+			$attributes_values = is_array($attributes_array) ? array_merge( $attributes_values, $attributes_array) : $attributes_values;
+		}
+		$attributes_values = is_array($attributes_values) ? array_unique( $attributes_values ) : null;
+
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
 		$wsv_show_vari_on_shortcode = get_option( 'wsv_show_vari_on_shortcode' );
+		$wsv_excludes_attributes = get_option( 'wsv_excludes_attributes' );
 		?>
 		<div class="wrap">
 			<form method="POST">
@@ -188,6 +213,34 @@ class Wsv_Admin {
 										?>
 									>
 								</div>
+							</td>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<strong>
+									<?php esc_html_e( 'Exclude Attribute Taxonomies', 'wsv' ); ?>
+								</strong>
+								<br>
+								<small  style="font-weight: initial;">
+									<?php esc_html_e( 'Variations assigned to this category will not appear. Create an "Any..." variation to still show variations.', 'wsv' ); ?>
+								</small>
+							</th>
+							<td>
+								<select multiple name="wsv-settings[wsv_excludes_attributes][]">
+									<?php
+									foreach ( $attributes_values as $value ) {
+										$selected = '';
+										if ( in_array( $value, $wsv_excludes_attributes )) {
+											$selected = 'selected';
+										}
+									?>
+										<option value="<?php echo $value; ?>" <?php echo $selected; ?> ><?php echo $value; ?></option>
+									<?php
+									}
+									?>
+								</select>
 							</td>
 						</div>
 					</tr>
