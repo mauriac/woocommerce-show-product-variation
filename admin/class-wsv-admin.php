@@ -125,6 +125,9 @@ class Wsv_Admin {
 			if ( ! isset( $_POST['wsv-settings']['wsv_excludes_attributes'] ) ) {
 				$_POST['wsv-settings']['wsv_excludes_attributes'] = null;
 			}
+			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_keep_first'] ) ) {
+				$_POST['wsv-settings']['wsv_show_vari_keep_first'] = null;
+			}
 			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
 
 			?>
@@ -161,6 +164,7 @@ class Wsv_Admin {
 		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
 		$wsv_show_vari_on_shortcode = get_option( 'wsv_show_vari_on_shortcode' );
 		$wsv_excludes_attributes = get_option( 'wsv_excludes_attributes' );
+		$wsv_show_vari_keep_first = get_option( 'wsv_show_vari_keep_first' );
 		?>
 		<div class="wrap">
 			<form method="POST">
@@ -241,6 +245,28 @@ class Wsv_Admin {
 									}
 									?>
 								</select>
+							</td>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<strong>
+									<?php esc_html_e( 'Keep First Variation', 'wsv' ); ?>
+								</strong>
+								<br>
+								<small style="font-weight: initial;">
+									<?php esc_html_e( 'First variation of each attribute term will be displayed.', 'wsv' ); ?>
+								</small>
+							</th>
+							<td>
+								<div class="form-check">
+									<input name="wsv-settings[wsv_show_vari_keep_first]" type="checkbox" class="form-check-input" 
+										<?php
+											echo ( ( 'on' === $wsv_show_vari_keep_first ) ? 'checked' : ' ' );
+										?>
+									>
+								</div>
 							</td>
 						</div>
 					</tr>
