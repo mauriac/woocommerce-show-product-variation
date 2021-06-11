@@ -1,7 +1,7 @@
 === Show Variations For Woocommerce ===
 Contributors: azouamauriac
 Donate link: #
-Tags: woocommerce, show variation, single, dropdown, variation, variable, Show Variations On Shop & Category WooCommerce
+Tags: woocommerce, show variation, single, dropdown, variation, variable
 Requires at least: 3.0.1
 Tested up to: 5.7
 Requires PHP: 7.0
@@ -11,7 +11,7 @@ Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display variations as single product or show variations dropdown on shop and category page; display table of all available variations of a variable product, and more.
+Display variations as single product or show variations dropdown on shop and category page.
 
 == Description ==
 
@@ -22,7 +22,6 @@ Show Product Variations For Woocommerce is Woocoomerce plugin to manage the disp
 <li>Exclude variations by attributes to display</li>
 <li>Show Variations Dropdown On Shop & Category</li>
 <li>Show Variations In Shortcodes</li>
-<li>Display variations as table on variable product page using datatable</li>
 <li>Search variations by typing search keywords</li>
 <li>Each variation will have its own "add to cart" button and this button uses AJAX so no reload needed to add it to cart </li>
 <li>Add custom name for variation</li>
@@ -37,18 +36,12 @@ Go to admin in **WooCommerce > WC SHOW VARIATION SETTINGS** just enable settings
 
 == Frequently Asked Questions ==
 
-= What is this plugin for? =
- 
-This plugin replace the default WooCommerce variations dropdowns by professional table with search by keywords and it also do AJAX add to cart ( no reload when click add to cart button ).
-You can also display variations as single product on shop and category.
-
 = What about foo bar? =
 
 
 == Screenshots ==
 
-1. variations tables
-2. variations on shop
+1. variations on shop
 
 == Changelog ==
 = 1.5.0 =
@@ -81,7 +74,3 @@ You can also display variations as single product on shop and category.
 We are developing this plugin for you. 
 If you discover a bug, you need a feature or have any idea to, let us know by posting your suggestion on the plugin reviews page [Reviews](https://wordpress.org/support/plugin/show-product-variations-for-woocommerce/reviews/#new-post)
 or you can [write us](mailto:azouamauriac@gmail.com "Your Inspiration")
-
-**COMING SOON**
-- Custom variation table.
-- Use shortcode to display variations tables.
