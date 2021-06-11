@@ -1,12 +1,12 @@
 === Show Variations For Woocommerce ===
 Contributors: azouamauriac
 Donate link: #
-Tags: woocommerce, show variation, single, dropdown, variation, variable
-Requires at least: 3.0.1
+Tags: display variation, single, dropdown, variation, variable, woocommerce
+Requires at least: 4.5.0
 Tested up to: 5.7
 Requires PHP: 7.0
-WC requires at least: 3.0.0
-WC tested up to: 5.1.0
+WC requires at least: 4.0.0
+WC tested up to: 5.4.1
 Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,12 +18,11 @@ Display variations as single product or show variations dropdown on shop and cat
 Show Product Variations For Woocommerce is Woocoomerce plugin to manage the display of variations, including the following:
 <ul>
 <li>Show Variations As Single Product On Catalog Pages (shop, category, tag, search)</li>
-<li>Choose which variations to display</li>
-<li>Exclude variations by attributes to display</li>
+<li>Exclude variations by attributes</li>
+<li>Exclude product by category</li>
 <li>Show Variations Dropdown On Shop & Category</li>
 <li>Show Variations In Shortcodes</li>
 <li>Search variations by typing search keywords</li>
-<li>Each variation will have its own "add to cart" button and this button uses AJAX so no reload needed to add it to cart </li>
 <li>Add custom name for variation</li>
 </ul>
 
@@ -41,7 +40,8 @@ Go to admin in **WooCommerce > WC SHOW VARIATION SETTINGS** just enable settings
 
 == Screenshots ==
 
-1. variations on shop
+1. variations settings page
+2. variations on shop
 
 == Changelog ==
 = 1.5.0 =
