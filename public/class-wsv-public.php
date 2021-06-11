@@ -195,6 +195,18 @@ class Wsv_Public {
 				$q->set( 'post__not_in', $excl_vari );
 			}
 		}
+		$wsv_excludes_category = get_option( 'wsv_excludes_category', array() );
+		if ( $wsv_excludes_category ) {
+			$tax_query   = (array) $q->get( 'tax_query' );
+			$tax_query[] = array(
+				'taxonomy' => 'product_cat',
+				'field'    => 'ids',
+				'operator' => 'NOT IN',
+				'terms'    => $wsv_excludes_category,
+			);
+			$q->set( 'tax_query', $tax_query );
+		}
+
 		return $q;
 	}
 

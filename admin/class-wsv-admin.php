@@ -119,6 +119,9 @@ class Wsv_Admin {
 			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_on_shortcode'] ) ) {
 				$_POST['wsv-settings']['wsv_show_vari_on_shortcode'] = null;
 			}
+			if ( ! isset( $_POST['wsv-settings']['wsv_excludes_category'] ) ) {
+				$_POST['wsv-settings']['wsv_excludes_category'] = null;
+			}
 			if ( ! isset( $_POST['wsv-settings']['wsv_excludes_attributes'] ) ) {
 				$_POST['wsv-settings']['wsv_excludes_attributes'] = null;
 			}
@@ -138,9 +141,10 @@ class Wsv_Admin {
 			<?php
 		}
 
-		$variable_products = wc_get_products( array(
-			'type'  => 'variable',
-			'limit' => -1,
+		$variable_products = wc_get_products(
+			array(
+				'type'  => 'variable',
+				'limit' => -1,
 			)
 		);
 		$attributes_values = array();
@@ -153,15 +157,21 @@ class Wsv_Admin {
 			},
 			$variable_products
 		);
-		foreach ($all_attributes as $attributes_array) {
-			$attributes_values = is_array($attributes_array) ? array_merge( $attributes_values, $attributes_array) : $attributes_values;
+		foreach ( $all_attributes as $attributes_array ) {
+			$attributes_values = is_array( $attributes_array ) ? array_merge( $attributes_values, $attributes_array ) : $attributes_values;
 		}
-		$attributes_values = is_array($attributes_values) ? array_unique( $attributes_values ) : null;
+		$attributes_values = is_array( $attributes_values ) ? array_unique( $attributes_values ) : null;
 
-		$wsv_show_vari_on_shop_cat = get_option( 'wsv_show_vari_on_shop_cat' );
+		$args               = array(
+			'taxonomy' => 'product_cat',
+		);
+		$product_categories = get_terms( $args );
+
+		$wsv_show_vari_on_shop_cat  = get_option( 'wsv_show_vari_on_shop_cat' );
 		$wsv_show_vari_on_shortcode = get_option( 'wsv_show_vari_on_shortcode' );
-		$wsv_excludes_attributes = get_option( 'wsv_excludes_attributes' );
-		$wsv_show_vari_keep_first = get_option( 'wsv_show_vari_keep_first' );
+		$wsv_excludes_category      = get_option( 'wsv_excludes_category', array() );
+		$wsv_excludes_attributes    = get_option( 'wsv_excludes_attributes' );
+		$wsv_show_vari_keep_first   = get_option( 'wsv_show_vari_keep_first' );
 		?>
 		<div class="wrap">
 			<form method="POST">
@@ -220,6 +230,29 @@ class Wsv_Admin {
 					<tr valign="top">
 						<div class="col-auto my-1">
 							<th scope="row">
+								<strong> 
+									<?php esc_html_e( 'Exclude Category', 'wsv' ); ?>
+								</strong>
+							</th>
+							<td>
+								<select multiple name="wsv-settings[wsv_excludes_category][]">
+									<?php foreach ( $product_categories as $WP_Term ) : ?>
+										<?php
+											$value    = $WP_Term->term_id;
+											$selected = '';
+										if ( in_array( $value, $wsv_excludes_category, true ) ) {
+											$selected = 'selected';
+										}
+										?>
+										<option value="<?php echo $value; ?>" <?php echo $selected; ?> ><?php echo $WP_Term->name; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</td>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
 								<strong>
 									<?php esc_html_e( 'Exclude Attribute Taxonomies', 'wsv' ); ?>
 								</strong>
@@ -233,12 +266,12 @@ class Wsv_Admin {
 									<?php
 									foreach ( $attributes_values as $value ) {
 										$selected = '';
-										if ( in_array( $value, $wsv_excludes_attributes )) {
+										if ( in_array( $value, $wsv_excludes_attributes ) ) {
 											$selected = 'selected';
 										}
-									?>
+										?>
 										<option value="<?php echo $value; ?>" <?php echo $selected; ?> ><?php echo $value; ?></option>
-									<?php
+										<?php
 									}
 									?>
 								</select>
@@ -372,7 +405,7 @@ class Wsv_Admin {
 		$wsv_exc_parent      = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
 		$wsv_exc_varia_table = is_array( $wsv_exc_varia_table ) ? $wsv_exc_varia_table : array();
 
-		$vars_id                  = $product->get_children();
+		$vars_id = $product->get_children();
 		if ( isset( $_POST[ WSV_EXCEPT_SING_VARI ] ) ) {
 			$wsv_exc_vari[ $post_id ] = $vars_id;
 			update_post_meta( $post_id, WSV_EXCEPT_SING_VARI, 'yes' );
@@ -441,14 +474,16 @@ class Wsv_Admin {
 			)
 		);
 
-		woocommerce_wp_checkbox( array( // Checkbox.
-			'id'          => 'wsv_hide_variation[' . $variation_post->ID . ']',
-			'name'        => 'wsv_hide_variation[' . $variation_post->ID . ']',
-			'label'       =>  __( 'Hide this variation(' . WSV_PLUGIN_NAME . ' ) ', 'wsv' ),
-			'value'       => get_post_meta( $variation_post->ID, WSV_HIDE_VARIATION, true ),
-			'description' => __( 'Enable this will hide variation on shop and categorie page.', 'woocommerce' ),
-			'desc_tip'      => true,
-		) );
+		woocommerce_wp_checkbox(
+			array( // Checkbox.
+				'id'          => 'wsv_hide_variation[' . $variation_post->ID . ']',
+				'name'        => 'wsv_hide_variation[' . $variation_post->ID . ']',
+				'label'       => __( 'Hide this variation(' . WSV_PLUGIN_NAME . ' ) ', 'wsv' ),
+				'value'       => get_post_meta( $variation_post->ID, WSV_HIDE_VARIATION, true ),
+				'description' => __( 'Enable this will hide variation on shop and categorie page.', 'woocommerce' ),
+				'desc_tip'    => true,
+			)
+		);
 	}
 
 	public function save_custom_field_variations( $variation_id ) {
@@ -456,8 +491,8 @@ class Wsv_Admin {
 
 		$hide_variation = $_POST[ WSV_HIDE_VARIATION ][ $variation_id ];
 
-		$variation    = wc_get_product($variation_id);
-		$parent_id    = $variation->get_parent_id();
+		$variation = wc_get_product( $variation_id );
+		$parent_id = $variation->get_parent_id();
 
 		$wsv_exc_vari   = get_option( WSV_EXCEPT_SING_VARI );
 		$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
