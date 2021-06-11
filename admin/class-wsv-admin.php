@@ -116,9 +116,6 @@ class Wsv_Admin {
 
 	public static function get_single_variation_settings_page() {
 		if ( ( isset( $_POST['wsv-settings'], $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
-			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
-				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
-			}
 			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_on_shortcode'] ) ) {
 				$_POST['wsv-settings']['wsv_show_vari_on_shortcode'] = null;
 			}
@@ -278,50 +275,6 @@ class Wsv_Admin {
 		<?php
 	}
 
-	public static function get_variable_table_settings_page() {
-		if ( ( isset( $_POST['wsv-settings'], $_POST['securite_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['securite_nonce'] ), 'wsv_securite' ) ) ) {
-			if ( ! isset( $_POST['wsv-settings']['wsv_enable_var_table_show'] ) ) {
-				$_POST['wsv-settings']['wsv_enable_var_table_show'] = null;
-			}
-			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
-
-			?>
-			<div class="wad notice notice-success is-dismissible">
-				<p>
-					<?php
-						echo '<b>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</b>' . sprintf( __( ': Data saved successful!', 'wsv' ) );
-					?>
-				</p>
-			</div>
-			<?php
-		}
-		$wsv_enable_var_table_show = get_option( 'wsv_enable_var_table_show' );
-		?>
-		<div class="wrap">
-			<form method="POST">
-				<table class="form-table">
-					<tr valign="top">
-						<th scope="row">
-							<strong>
-								<label class="form-check-label" for="wsv_enable_var_table_show"><?php _e( 'Enable Variations Table', 'wsv' ); ?></label>
-							</strong>
-						</th>
-						<td>
-							<input type="checkbox" 
-							<?php
-								echo ( ( $wsv_enable_var_table_show ) ? 'checked' : '' );
-							?>
-							name="wsv-settings[wsv_enable_var_table_show]" class="form-check-input" id="wsv_enable_var_table_show" /><br />
-						</td>
-					</tr>
-				</table>
-				<input type="hidden" name="securite_nonce" value="<?php echo esc_html( wp_create_nonce( 'wsv_securite' ) ); ?>"/>
-				<span ><?php submit_button(); ?></span>
-			</form>
-		</div>
-		<?php
-	}
-
 	/**
 	 * Function for configure Ultimate SMS Notifications settings.
 	 */
@@ -346,7 +299,6 @@ class Wsv_Admin {
 			</div>
 			<h2 class="nav-tab-wrapper">
 				<a href="?page=wsv&tab=variations-options"  class="nav-tab <?php echo 'variations-options' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Single Variation Options', 'wsv' ); ?></a>
-				<a href="?page=wsv&tab=table-settings"  class="nav-tab <?php echo 'table-settings' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Variable Product Table', 'wsv' ); ?></a>
 			</h2>
 				<?php
 				if ( 'variations-options' === $active_tab ) {
@@ -355,10 +307,8 @@ class Wsv_Admin {
 					<?php
 						$this->get_single_variation_settings_page();
 					?>
-		</div>
+				</div>
 					<?php
-				} elseif ( 'table-settings' === $active_tab ) {
-					$this->get_variable_table_settings_page();
 				}
 				?>
 		</div>
