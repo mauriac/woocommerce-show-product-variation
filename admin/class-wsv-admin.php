@@ -308,9 +308,6 @@ class Wsv_Admin {
 		<?php
 	}
 
-	/**
-	 * Function for configure Ultimate SMS Notifications settings.
-	 */
 	public function configure_settings_page() {
 		?>
 		<?php
