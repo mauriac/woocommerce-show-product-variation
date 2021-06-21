@@ -282,4 +282,37 @@ class Wsv_Public {
 		}
 		return $name;
 	}
+
+	/**
+	 * Show lowest/highest prices for variable products
+	 */
+	public function show_variation_price_format( $price, $product ) {
+
+		$wsv_show_vari_lh_price = get_option( 'wsv_show_vari_lh_price', null);
+		if ( $wsv_show_vari_lh_price ) {
+			// Main Price
+			$prices = array( $product->get_variation_price( 'min', true ), $product->get_variation_price( 'max', true ) );
+			if ( 'lowest' === $wsv_show_vari_lh_price ) {
+				$price  = $prices[0] !== $prices[1] ? sprintf( __( 'From: %1$s', 'woocommerce' ), wc_price( $prices[0] ) ) : wc_price( $prices[0] );
+				// Sale Price
+				$regular_prices = array( $product->get_variation_regular_price( 'min', true ), $product->get_variation_regular_price( 'max', true ) );
+				sort( $regular_prices );
+				$saleprice = $regular_prices[0] !== $regular_prices[1] ? sprintf( __( 'From: %1$s', 'woocommerce' ), wc_price( $regular_prices[0] ) ) : wc_price( $regular_prices[0] );
+				if ( $price !== $saleprice ) {
+					$price = '<del>' . $saleprice . $product->get_price_suffix() . '</del> <ins>' . wc_price( $prices[0] ) . $product->get_price_suffix() . '</ins>';
+				}
+			} elseif ( 'highest' === $wsv_show_vari_lh_price ) {
+				$price  = $prices[0] !== $prices[1] ? sprintf( __( 'Up To: %1$s', 'woocommerce' ), wc_price( $prices[1] ) ) : wc_price( $prices[1] );
+				// Sale Price
+				$regular_prices = array( $product->get_variation_regular_price( 'max', true ), $product->get_variation_regular_price( 'min', true ) );
+				sort( $regular_prices );
+				$saleprice = $regular_prices[0] !== $regular_prices[1] ? sprintf( __( 'Up To: %1$s', 'woocommerce' ), wc_price( $regular_prices[0] ) ) : wc_price( $regular_prices[0] );
+				if ( $price !== $saleprice ) {
+					$price = '<del>' . $saleprice . $product->get_price_suffix() . '</del> <ins>' . wc_price( $prices[1] ) . $product->get_price_suffix() . '</ins>';
+				}
+			}
+		}
+		return $price;
+	}
+
 }

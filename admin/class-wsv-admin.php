@@ -128,6 +128,9 @@ class Wsv_Admin {
 			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_keep_first'] ) ) {
 				$_POST['wsv-settings']['wsv_show_vari_keep_first'] = null;
 			}
+			if ( ! isset( $_POST['wsv-settings']['wsv_show_vari_lh_price'] ) ) {
+				$_POST['wsv-settings']['wsv_show_vari_lh_price'] = null;
+			}
 			wsv_update_option( wp_unslash( $_POST['wsv-settings'] ) );
 
 			?>
@@ -172,6 +175,7 @@ class Wsv_Admin {
 		$wsv_excludes_category      = get_option( 'wsv_excludes_category', array() );
 		$wsv_excludes_attributes    = get_option( 'wsv_excludes_attributes' );
 		$wsv_show_vari_keep_first   = get_option( 'wsv_show_vari_keep_first' );
+		$wsv_show_vari_lh_price     = get_option( 'wsv_show_vari_lh_price' );
 		?>
 		<div class="wrap">
 			<form method="POST">
@@ -296,6 +300,56 @@ class Wsv_Admin {
 											echo ( ( 'on' === $wsv_show_vari_keep_first ) ? 'checked' : ' ' );
 										?>
 									>
+								</div>
+							</td>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<h3 class="wc-settings-sub-title ">
+									<?php
+										esc_html_e( 'Variation Price', 'wsv' );
+									?>
+								</h3>
+							</th>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<strong>
+									<?php esc_html_e( 'Show Lowest/Highest Price', 'wsv' ); ?>
+								</strong>
+								<br>
+								<small style="font-weight: initial;">
+									<?php esc_html_e( 'Show lowest/highest variation price instead of price range.', 'wsv' ); ?>
+								</small>
+							</th>
+							<td>
+								<div class="form-check">
+								<select name="wsv-settings[wsv_show_vari_lh_price]">
+									<option value="no"
+										<?php
+											echo ( ( 'no' === $wsv_show_vari_lh_price ) ? 'selected' : '' );
+										?>
+										>
+									</option>
+									<option value="lowest" 
+										<?php
+											echo ( ( 'lowest' === $wsv_show_vari_lh_price ) ? 'selected' : '' );
+										?>
+										>
+										<?php esc_attr_e( 'Lowest', 'wsv' ); ?>
+									</option>
+									<option value="highest" 
+										<?php
+											echo ( ( 'highest' === $wsv_show_vari_lh_price ) ? 'selected' : '' );
+										?>
+										>
+										<?php esc_html_e( 'Highest', 'wsv' ); ?>
+									</option>
+								</select>
 								</div>
 							</td>
 						</div>

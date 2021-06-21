@@ -188,6 +188,9 @@ class Wsv {
 
 		$this->loader->add_filter( 'woocommerce_loop_add_to_cart_link', $plugin_public, 'display_variation_as_dropdown', 10, 2 );
 		$this->loader->add_filter( 'woocommerce_product_variation_title', $plugin_public, 'display_product_title', 10, 2 );
+
+		$this->loader->add_filter( 'woocommerce_variable_sale_price_html', $plugin_public, 'show_variation_price_format', 10, 2 );
+		$this->loader->add_filter( 'woocommerce_variable_price_html', $plugin_public, 'show_variation_price_format', 10, 2 );
 	}
 
 	/**
