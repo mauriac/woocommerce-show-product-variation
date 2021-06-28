@@ -110,9 +110,9 @@ class Wsv_Public {
 	}
 
 	// public static function add_product_to_cart() {
-	// 	$product_id  = filter_input( INPUT_POST, 'product_id' );
-	// 	$product_qty = filter_input( INPUT_POST, 'product_qty' );
-	// 	WC()->cart->add_to_cart( $product_id, $product_qty );
+	// $product_id  = filter_input( INPUT_POST, 'product_id' );
+	// $product_qty = filter_input( INPUT_POST, 'product_qty' );
+	// WC()->cart->add_to_cart( $product_id, $product_qty );
 	// }
 
 	public function product_query( $q ) {
@@ -164,10 +164,29 @@ class Wsv_Public {
 				}
 			}
 
-			$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR );
-			$wsv_exc_vari   = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
-			$wsv_exc_parent = is_array( $wsv_exc_parent ) ? $wsv_exc_parent : array();
-			$excl_vari      = array();
+			$wsv_exc_vari = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
+
+			// exclude variable parent product.
+			$wsv_hide_parent_product_variable = get_option( 'wsv_hide_parent_product_variable' );
+			$wsv_exc_parent                   = array();
+			if ( $wsv_hide_parent_product_variable ) {
+				$variable_product = wc_get_products(
+					array(
+						'type'  => 'variable',
+						'limit' => -1,
+					)
+				);
+
+				$wsv_exc_parent = array_map(
+					function( $o ) {
+						return $o->get_id();
+					},
+					(array) $variable_product
+				);
+			} else {
+				$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR, array() );
+			}
+			$excl_vari = array();
 			foreach ( $wsv_exc_vari as $value ) {
 				if ( is_array( $value ) ) {
 					$excl_vari = isset( $excl_vari ) ? array_merge( $excl_vari, $value ) : $value;
@@ -288,12 +307,12 @@ class Wsv_Public {
 	 */
 	public function show_variation_price_format( $price, $product ) {
 
-		$wsv_show_vari_lh_price = get_option( 'wsv_show_vari_lh_price', null);
+		$wsv_show_vari_lh_price = get_option( 'wsv_show_vari_lh_price', null );
 		if ( $wsv_show_vari_lh_price ) {
 			// Main Price
 			$prices = array( $product->get_variation_price( 'min', true ), $product->get_variation_price( 'max', true ) );
 			if ( 'lowest' === $wsv_show_vari_lh_price ) {
-				$price  = $prices[0] !== $prices[1] ? sprintf( __( 'From: %1$s', 'woocommerce' ), wc_price( $prices[0] ) ) : wc_price( $prices[0] );
+				$price = $prices[0] !== $prices[1] ? sprintf( __( 'From: %1$s', 'woocommerce' ), wc_price( $prices[0] ) ) : wc_price( $prices[0] );
 				// Sale Price
 				$regular_prices = array( $product->get_variation_regular_price( 'min', true ), $product->get_variation_regular_price( 'max', true ) );
 				sort( $regular_prices );
@@ -302,7 +321,7 @@ class Wsv_Public {
 					$price = '<del>' . $saleprice . $product->get_price_suffix() . '</del> <ins>' . wc_price( $prices[0] ) . $product->get_price_suffix() . '</ins>';
 				}
 			} elseif ( 'highest' === $wsv_show_vari_lh_price ) {
-				$price  = $prices[0] !== $prices[1] ? sprintf( __( 'Up To: %1$s', 'woocommerce' ), wc_price( $prices[1] ) ) : wc_price( $prices[1] );
+				$price = $prices[0] !== $prices[1] ? sprintf( __( 'Up To: %1$s', 'woocommerce' ), wc_price( $prices[1] ) ) : wc_price( $prices[1] );
 				// Sale Price
 				$regular_prices = array( $product->get_variation_regular_price( 'max', true ), $product->get_variation_regular_price( 'min', true ) );
 				sort( $regular_prices );

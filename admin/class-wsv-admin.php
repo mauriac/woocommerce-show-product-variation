@@ -122,6 +122,9 @@ class Wsv_Admin {
 			if ( ! isset( $_POST['wsv-settings']['wsv_excludes_category'] ) ) {
 				$_POST['wsv-settings']['wsv_excludes_category'] = null;
 			}
+			if ( ! isset( $_POST['wsv-settings']['wsv_hide_parent_product_variable'] ) ) {
+				$_POST['wsv-settings']['wsv_hide_parent_product_variable'] = null;
+			}
 			if ( ! isset( $_POST['wsv-settings']['wsv_excludes_attributes'] ) ) {
 				$_POST['wsv-settings']['wsv_excludes_attributes'] = null;
 			}
@@ -170,12 +173,13 @@ class Wsv_Admin {
 		);
 		$product_categories = get_terms( $args );
 
-		$wsv_show_vari_on_shop_cat  = get_option( 'wsv_show_vari_on_shop_cat' );
-		$wsv_show_vari_on_shortcode = get_option( 'wsv_show_vari_on_shortcode' );
-		$wsv_excludes_category      = get_option( 'wsv_excludes_category', array() );
-		$wsv_excludes_attributes    = get_option( 'wsv_excludes_attributes' );
-		$wsv_show_vari_keep_first   = get_option( 'wsv_show_vari_keep_first' );
-		$wsv_show_vari_lh_price     = get_option( 'wsv_show_vari_lh_price' );
+		$wsv_show_vari_on_shop_cat        = get_option( 'wsv_show_vari_on_shop_cat' );
+		$wsv_show_vari_on_shortcode       = get_option( 'wsv_show_vari_on_shortcode' );
+		$wsv_hide_parent_product_variable = get_option( 'wsv_hide_parent_product_variable' );
+		$wsv_excludes_category            = get_option( 'wsv_excludes_category', array() );
+		$wsv_excludes_attributes          = get_option( 'wsv_excludes_attributes' );
+		$wsv_show_vari_keep_first         = get_option( 'wsv_show_vari_keep_first' );
+		$wsv_show_vari_lh_price           = get_option( 'wsv_show_vari_lh_price' );
 		?>
 		<div class="wrap">
 			<form method="POST">
@@ -225,6 +229,24 @@ class Wsv_Admin {
 									<input name="wsv-settings[wsv_show_vari_on_shortcode]" type="checkbox" class="form-check-input" id="exampleCheck1"
 										<?php
 											echo ( ( 'on' === $wsv_show_vari_on_shortcode ) ? 'checked' : ' ' );
+										?>
+									>
+								</div>
+							</td>
+						</div>
+					</tr>
+					<tr valign="top">
+						<div class="col-auto my-1">
+							<th scope="row">
+								<strong>
+									<?php esc_attr_e( 'Hide Parent Product of Variable Product', 'wsv' ); ?>
+								</strong>
+							</th>
+							<td>
+								<div class="form-check">
+									<input name="wsv-settings[wsv_hide_parent_product_variable]" type="checkbox" class="form-check-input"
+										<?php
+											echo ( ( 'on' === $wsv_hide_parent_product_variable ) ? 'checked' : ' ' );
 										?>
 									>
 								</div>
