@@ -16,7 +16,7 @@
  * Plugin Name:       Show Variations For Woocommerce
  * Plugin URI:        #
  * Description:       Display variations as single product or show variations dropdown on shop and category page; show table of all available variations of a variable product, and more.
- * Version:           1.5.1
+ * Version:           1.6
  * Author:            FLINIMI
  * Author URI:        azouamauriac@gmail.com
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WSV_VERSION', '1.5.1' );
+define( 'WSV_VERSION', '1.6' );
 define( 'WSV_PLUGIN_NAME', 'Show Product Variations For Woocommerce' );
 /**
  * Designates the label of variation that will be excluded.

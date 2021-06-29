@@ -7,7 +7,7 @@ Tested up to: 5.7
 Requires PHP: 7.0
 WC requires at least: 4.0.0
 WC tested up to: 5.4.1
-Stable tag: 1.5.1
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,33 +19,32 @@ Show Product Variations For Woocommerce is Woocoomerce plugin to manage the disp
 <ul>
 <li>Show Variations As Single Product On Catalog Pages (shop, category, tag, search)</li>
 <li>Exclude variations by attributes</li>
-<li>Exclude product by category</li>
+<li>Exclude variations by category</li>
+<li>Hide parent variable product</li>
 <li>Show Variations Dropdown On Shop & Category</li>
 <li>Show Variations In Shortcodes</li>
 <li>Search variations by typing search keywords</li>
 <li>Add custom name for variation</li>
+<li>Show Lowest/Highest Price for variable product</li>
 </ul>
 
-== Upgrading from 1.2.2 ==
+== Upgrading from 1.6 ==
 It's completely safe to upgrade from last release, there is no breaking changes, just cleaner code and new features.
 
 == Installation ==
 
 Go to admin in **WooCommerce > WC SHOW VARIATION SETTINGS** just enable settings
 
-== Frequently Asked Questions ==
-
-= What about foo bar? =
-
-
 == Screenshots ==
 
 1. variations settings page
-2. variations on shop
+2. single variations settings page
+3. add custom name to variation
+4. variations on shop
 
 == Changelog ==
 = 1.5.0 =
-* Choose which variations to display
+* Exclude variations
 
 = 1.4.0 =
 * Show variations in woocommerce shortcodes
