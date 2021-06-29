@@ -138,10 +138,10 @@ class Wsv_Public {
 					)
 				);
 
-				$wsv_exc_vari = array();
+				$excl_vari = array();
 				if ( is_array( $variable_list_by_cat ) ) {
 					foreach ( $variable_list_by_cat as $variable ) {
-						$wsv_exc_vari = array_merge( $wsv_exc_vari, $variable->get_children() );
+						$excl_vari = array_merge( $excl_vari, $variable->get_children() );
 					}
 				}
 			}
@@ -154,6 +154,7 @@ class Wsv_Public {
 					)
 				);
 				$first_keep         = array();
+				$wsv_exc_vari = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
 				if ( is_array( $variation_products ) ) {
 					foreach ( $variation_products as $variation ) {
 						$variation_attributes = $variation->get_attributes();
@@ -183,8 +184,6 @@ class Wsv_Public {
 				}
 			}
 
-			$wsv_exc_vari = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
-
 			// exclude variable parent product.
 			$wsv_hide_parent_product_variable = get_option( 'wsv_hide_parent_product_variable' );
 			$wsv_exc_parent                   = array();
@@ -205,7 +204,7 @@ class Wsv_Public {
 			} else {
 				$wsv_exc_parent = get_option( WSV_EXC_PROD_PAR, array() );
 			}
-			$excl_vari = array();
+			// exclude single variation.
 			foreach ( $wsv_exc_vari as $value ) {
 				if ( is_array( $value ) ) {
 					$excl_vari = isset( $excl_vari ) ? array_merge( $excl_vari, $value ) : $value;
@@ -213,7 +212,8 @@ class Wsv_Public {
 			}
 			$excl_vari = isset( $wsv_exc_parent ) ? array_merge( $excl_vari, $wsv_exc_parent ) : $excl_vari;
 			if ( is_product_category() ) {
-				$products = wc_get_products( $q->query_vars ); // a ameliorer recuperer uniquement les variations
+				$products = wc_get_products( $q->query_vars );
+
 				if ( ! empty( $products ) ) {
 					$products_id = array_map(
 						function( $o ) {
