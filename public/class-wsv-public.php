@@ -131,15 +131,36 @@ class Wsv_Public {
 
 			$first_keep = array();
 
+			$wsv_excludes_category = get_option( 'wsv_excludes_category' );
+			if ( is_array( $wsv_excludes_category ) ) {
+				$variable_list_by_cat = wc_get_products(
+					array(
+						'type'      => 'variable',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'product_cat',
+								'terms'    => $wsv_excludes_category,
+								'operator' => 'IN',
+							),
+						),
+						'limit'     => -1,
+					)
+				);
+
+				$wsv_exc_vari = array();
+				if ( is_array( $variable_list_by_cat ) ) {
+					foreach ( $variable_list_by_cat as $variable ) {
+						$wsv_exc_vari = array_merge( $wsv_exc_vari, $variable->get_children() );
+					}
+				}
+			}
+
 			if ( is_array( $variation_products ) ) {
 				foreach ( $variation_products as $variation ) {
 					$variation_attributes = $variation->get_attributes();
 					if ( is_array( $wsv_excludes_attributes ) ) {
 						foreach ( $wsv_excludes_attributes as $excl_attribute_val ) {
 							if ( isset( $variation_attributes[ $excl_attribute_val ] ) && ! empty( $variation_attributes[ $excl_attribute_val ] ) ) {
-								if ( ! is_array( $wsv_exc_vari ) ) {
-									$wsv_exc_vari = array();
-								}
 
 								if ( 'on' === $wsv_show_vari_keep_first ) {
 									$parent_variation_attributes = wc_get_product( $variation->get_parent_id() )->get_variation_attributes();
@@ -194,7 +215,7 @@ class Wsv_Public {
 			}
 			$excl_vari = isset( $wsv_exc_parent ) ? array_merge( $excl_vari, $wsv_exc_parent ) : $excl_vari;
 			if ( is_product_category() ) {
-				$products = wc_get_products( $q->query_vars );
+				$products = wc_get_products( $q->query_vars ); // a ameliorer recuperer uniquement les variations
 				if ( ! empty( $products ) ) {
 					$products_id = array_map(
 						function( $o ) {
@@ -213,17 +234,6 @@ class Wsv_Public {
 			} else {
 				$q->set( 'post__not_in', $excl_vari );
 			}
-		}
-		$wsv_excludes_category = get_option( 'wsv_excludes_category', array() );
-		if ( $wsv_excludes_category ) {
-			$tax_query   = (array) $q->get( 'tax_query' );
-			$tax_query[] = array(
-				'taxonomy' => 'product_cat',
-				'field'    => 'ids',
-				'operator' => 'NOT IN',
-				'terms'    => $wsv_excludes_category,
-			);
-			$q->set( 'tax_query', $tax_query );
 		}
 
 		return $q;
