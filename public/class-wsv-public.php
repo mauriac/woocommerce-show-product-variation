@@ -122,15 +122,6 @@ class Wsv_Public {
 			$wsv_excludes_attributes  = get_option( 'wsv_excludes_attributes' );
 			$wsv_show_vari_keep_first = get_option( 'wsv_show_vari_keep_first' );
 
-			$variation_products = wc_get_products(
-				array(
-					'type'  => 'variation',
-					'limit' => -1,
-				)
-			);
-
-			$first_keep = array();
-
 			$wsv_excludes_category = get_option( 'wsv_excludes_category' );
 			if ( is_array( $wsv_excludes_category ) ) {
 				$variable_list_by_cat = wc_get_products(
@@ -155,10 +146,17 @@ class Wsv_Public {
 				}
 			}
 
-			if ( is_array( $variation_products ) ) {
-				foreach ( $variation_products as $variation ) {
-					$variation_attributes = $variation->get_attributes();
-					if ( is_array( $wsv_excludes_attributes ) ) {
+			if ( is_array( $wsv_excludes_attributes ) ) {
+				$variation_products = wc_get_products(
+					array(
+						'type'  => 'variation',
+						'limit' => -1,
+					)
+				);
+				$first_keep         = array();
+				if ( is_array( $variation_products ) ) {
+					foreach ( $variation_products as $variation ) {
+						$variation_attributes = $variation->get_attributes();
 						foreach ( $wsv_excludes_attributes as $excl_attribute_val ) {
 							if ( isset( $variation_attributes[ $excl_attribute_val ] ) && ! empty( $variation_attributes[ $excl_attribute_val ] ) ) {
 
