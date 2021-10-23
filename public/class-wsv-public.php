@@ -119,6 +119,7 @@ class Wsv_Public {
 		if ( 'sp' === get_option( 'wsv_show_vari_on_shop_cat' ) ) {
 			$q->set( 'post_type', array( 'product', 'product_variation' ) );
 			$wsv_exc_vari             = get_option( WSV_EXCEPT_SING_VARI );
+			$wsv_exc_vari             = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
 			$wsv_excludes_attributes  = get_option( 'wsv_excludes_attributes' );
 			$wsv_show_vari_keep_first = get_option( 'wsv_show_vari_keep_first' );
 
@@ -154,7 +155,6 @@ class Wsv_Public {
 					)
 				);
 				$first_keep         = array();
-				$wsv_exc_vari = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
 				if ( is_array( $variation_products ) ) {
 					foreach ( $variation_products as $variation ) {
 						$variation_attributes = $variation->get_attributes();
