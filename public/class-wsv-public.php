@@ -212,7 +212,12 @@ class Wsv_Public {
 			}
 			$excl_vari = isset( $wsv_exc_parent ) ? array_merge( $excl_vari, $wsv_exc_parent ) : $excl_vari;
 			if ( is_product_category() ) {
-				$products = wc_get_products( $q->query_vars );
+				$paged = $q->query_vars ['paged'];
+				if ( $paged > 1 ) {
+					$q->query_vars ['paged'] = $paged - 1;
+				}
+				$products                = wc_get_products( $q->query_vars );
+				$q->query_vars ['paged'] = $paged;
 
 				if ( ! empty( $products ) ) {
 					$products_id = array_map(
