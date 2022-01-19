@@ -1,0 +1,193 @@
+# This file is distributed under the GNU General Public License v3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: wsv\n"
+"POT-Creation-Date: 2022-01-19 09:50+0100\n"
+"PO-Revision-Date: \n"
+"Language-Team: Mauriac Azoua <azouamauriac@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,"
+"_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-wsv-admin.php:110
+#, php-format
+msgid "requires %1$sWooCommerce%2$s to be installed & activated!"
+msgstr ""
+
+#: admin/class-wsv-admin.php:143
+msgid ": Data saved successful!"
+msgstr ": Données sauvegardées avec succès !"
+
+#: admin/class-wsv-admin.php:191
+msgid "Show Variations On Shop & Category As"
+msgstr "Afficher les variations sur la boutique et la catégorie en tant que"
+
+#: admin/class-wsv-admin.php:207
+msgid "Single Product"
+msgstr "Produit unique"
+
+#: admin/class-wsv-admin.php:214
+msgid "Dropdown"
+msgstr "Liste déroulante"
+
+#: admin/class-wsv-admin.php:224
+msgid "Show variations in shortcodes"
+msgstr ""
+
+#: admin/class-wsv-admin.php:242
+msgid "Hide Parent Product of Variable Product"
+msgstr ""
+
+#: admin/class-wsv-admin.php:260
+msgid "Exclude Category"
+msgstr ""
+
+#: admin/class-wsv-admin.php:283
+msgid "Exclude Attribute Taxonomies"
+msgstr ""
+
+#: admin/class-wsv-admin.php:287
+msgid ""
+"Variations assigned to this category will not appear. Create an \"Any...\" "
+"variation to still show variations."
+msgstr ""
+
+#: admin/class-wsv-admin.php:311
+msgid "Keep First Variation"
+msgstr ""
+
+#: admin/class-wsv-admin.php:315
+msgid "First variation of each attribute term will be displayed."
+msgstr ""
+
+#: admin/class-wsv-admin.php:334
+msgid "Variation Price"
+msgstr ""
+
+#: admin/class-wsv-admin.php:344
+msgid "Show Lowest/Highest Price"
+msgstr ""
+
+#: admin/class-wsv-admin.php:348
+msgid "Show lowest/highest variation price instead of price range."
+msgstr ""
+
+#: admin/class-wsv-admin.php:365
+msgid "Lowest"
+msgstr ""
+
+#: admin/class-wsv-admin.php:372
+msgid "Highest"
+msgstr ""
+
+#: admin/class-wsv-admin.php:397
+msgid "Wc Show Variation Settings"
+msgstr ""
+
+#: admin/class-wsv-admin.php:400
+#, php-format
+msgid ""
+"Thank you for using our plugin! Would you please show us a little love by "
+"rating us in the WordPress.org? %s "
+msgstr ""
+
+#: admin/class-wsv-admin.php:403
+msgid "Reviews"
+msgstr ""
+
+#: admin/class-wsv-admin.php:407
+msgid "Single Variation Options"
+msgstr ""
+
+#: admin/class-wsv-admin.php:432
+msgid "Exclude Single Variation"
+msgstr ""
+
+#: admin/class-wsv-admin.php:433
+msgid "This option will exclude single variation on shop & category pages."
+msgstr ""
+
+#: admin/class-wsv-admin.php:439
+msgid "Hide Parent Variable Product"
+msgstr ""
+
+#: admin/class-wsv-admin.php:440
+msgid ""
+"Enable this option to Hide parent variation on shop & category pages.<br/"
+"><strong>Note: this option will be not work for Show Variations Dropdown</"
+"strong>"
+msgstr ""
+
+#: admin/class-wsv-admin.php:446
+msgid "Hide Variations Table"
+msgstr ""
+
+#: admin/class-wsv-admin.php:447
+msgid "Enable this option to Hide variations table on this product page."
+msgstr ""
+
+#: admin/class-wsv-admin.php:460
+msgid "Show Variations"
+msgstr ""
+
+#: admin/class-wsv-admin.php:531
+#, php-format
+msgid ""
+"If you like %1$s please leave us a %2$s rating or some reviews.This will "
+"make happy %3$s."
+msgstr ""
+
+#: admin/class-wsv-admin.php:531
+msgid "Thanks :)"
+msgstr ""
+
+#: admin/class-wsv-admin.php:531
+msgid "FLINM"
+msgstr ""
+
+#: admin/class-wsv-admin.php:541
+msgid "Custom Name("
+msgstr ""
+
+#: admin/class-wsv-admin.php:544
+msgid "Add custom name for this variation"
+msgstr ""
+
+#: admin/class-wsv-admin.php:554
+msgid "Hide this variation("
+msgstr ""
+
+#: admin/class-wsv-admin.php:556
+msgid "Enable this will hide variation on shop and categorie page."
+msgstr ""
+
+#: public/class-wsv-public.php:264
+msgid "This product is currently out of stock and unavailable."
+msgstr ""
+
+#: public/class-wsv-public.php:280
+msgid "Clear"
+msgstr ""
+
+#: public/class-wsv-public.php:328 public/class-wsv-public.php:332
+#, php-format
+msgid "From: %1$s"
+msgstr ""
+
+#: public/class-wsv-public.php:337 public/class-wsv-public.php:341
+#, php-format
+msgid "Up To: %1$s"
+msgstr ""
