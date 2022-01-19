@@ -72,7 +72,7 @@ class Wsv {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'wsv';
+		$this->plugin_name = 'show-product-variations-for-woocommerce';
 
 		$this->load_dependencies();
 		$this->set_locale();

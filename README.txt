@@ -2,11 +2,11 @@
 Contributors: azouamauriac
 Donate link: https://www.buymeacoffee.com/azouamauriac
 Tags: display variation, single, dropdown, variation, variable, woocommerce
-Requires at least: 4.5.0
+Requires at least: 4.6.0
 Tested up to: 5.8
 Requires PHP: 7.0
 WC requires at least: 4.0.0
-WC tested up to: 6.0.1
+WC tested up to: 6.1.0
 Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

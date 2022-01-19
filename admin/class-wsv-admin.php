@@ -107,11 +107,11 @@ class Wsv_Admin {
 	}
 
 	public function get_woocommerce_disabled_notice() {
-		echo '<div class="error"><p><strong>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</strong> ' . sprintf( __( 'requires %1$sWooCommerce%2$s to be installed & activated!', 'wsv' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>' ) . '</p></div>';
+		echo '<div class="error"><p><strong>' . esc_attr__( WSV_PLUGIN_NAME, 'show-product-variations-for-woocommerce' ) . '</strong> ' . sprintf( __( 'requires %1$sWooCommerce%2$s to be installed & activated!', 'show-product-variations-for-woocommerce' ), '<a href="http://wordpress.org/extend/plugins/woocommerce/">', '</a>' ) . '</p></div>';
 	}
 
 	public function add_wsv_menu() {
-		add_submenu_page( 'woocommerce', 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'wsv', array( $this, 'configure_settings_page' ) );
+		add_submenu_page( 'woocommerce', 'Wc Show Variation Settings', 'Wc Show Variation Settings', 'manage_options', 'show-product-variations-for-woocommerce', array( $this, 'configure_settings_page' ) );
 	}
 
 	public static function get_single_variation_settings_page() {
@@ -140,7 +140,7 @@ class Wsv_Admin {
 			<div class="wad notice notice-success is-dismissible">
 				<p>
 					<?php
-						echo '<b>' . esc_attr__( WSV_PLUGIN_NAME, 'wsv' ) . '</b>' . sprintf( __( ': Data saved successful!', 'wsv' ) );
+						echo '<b>' . esc_attr__( WSV_PLUGIN_NAME, 'show-product-variations-for-woocommerce' ) . '</b>' . sprintf( __( ': Data saved successful!', 'show-product-variations-for-woocommerce' ) );
 					?>
 				</p>
 			</div>
@@ -188,7 +188,7 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_attr_e( 'Show Variations On Shop & Category As', 'wsv' ); ?>
+									<?php esc_attr_e( 'Show Variations On Shop & Category As', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 							</th>
 							<td>
@@ -204,14 +204,14 @@ class Wsv_Admin {
 											echo ( ( 'sp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
 										?>
 										>
-										<?php esc_attr_e( 'Single Product', 'wsv' ); ?>
+										<?php esc_attr_e( 'Single Product', 'show-product-variations-for-woocommerce' ); ?>
 									</option>
 									<option value="dp" 
 										<?php
 											echo ( ( 'dp' === $wsv_show_vari_on_shop_cat ) ? 'selected' : '' );
 										?>
 										>
-										<?php esc_attr_e( 'Dropdown', 'wsv' ); ?>
+										<?php esc_attr_e( 'Dropdown', 'show-product-variations-for-woocommerce' ); ?>
 									</option>
 								</select>
 							</td>
@@ -221,7 +221,7 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_attr_e( 'Show variations in shortcodes', 'wsv' ); ?>
+									<?php esc_attr_e( 'Show variations in shortcodes', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 							</th>
 							<td>
@@ -239,7 +239,7 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_attr_e( 'Hide Parent Product of Variable Product', 'wsv' ); ?>
+									<?php esc_attr_e( 'Hide Parent Product of Variable Product', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 							</th>
 							<td>
@@ -257,7 +257,7 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong> 
-									<?php esc_html_e( 'Exclude Category', 'wsv' ); ?>
+									<?php esc_html_e( 'Exclude Category', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 							</th>
 							<td>
@@ -280,11 +280,11 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_html_e( 'Exclude Attribute Taxonomies', 'wsv' ); ?>
+									<?php esc_html_e( 'Exclude Attribute Taxonomies', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 								<br>
 								<small  style="font-weight: initial;">
-									<?php esc_html_e( 'Variations assigned to this category will not appear. Create an "Any..." variation to still show variations.', 'wsv' ); ?>
+									<?php esc_html_e( 'Variations assigned to this category will not appear. Create an "Any..." variation to still show variations.', 'show-product-variations-for-woocommerce' ); ?>
 								</small>
 							</th>
 							<td>
@@ -308,11 +308,11 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_html_e( 'Keep First Variation', 'wsv' ); ?>
+									<?php esc_html_e( 'Keep First Variation', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 								<br>
 								<small style="font-weight: initial;">
-									<?php esc_html_e( 'First variation of each attribute term will be displayed.', 'wsv' ); ?>
+									<?php esc_html_e( 'First variation of each attribute term will be displayed.', 'show-product-variations-for-woocommerce' ); ?>
 								</small>
 							</th>
 							<td>
@@ -331,7 +331,7 @@ class Wsv_Admin {
 							<th scope="row">
 								<h3 class="wc-settings-sub-title ">
 									<?php
-										esc_html_e( 'Variation Price', 'wsv' );
+										esc_html_e( 'Variation Price', 'show-product-variations-for-woocommerce' );
 									?>
 								</h3>
 							</th>
@@ -341,11 +341,11 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_html_e( 'Show Lowest/Highest Price', 'wsv' ); ?>
+									<?php esc_html_e( 'Show Lowest/Highest Price', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 								<br>
 								<small style="font-weight: initial;">
-									<?php esc_html_e( 'Show lowest/highest variation price instead of price range.', 'wsv' ); ?>
+									<?php esc_html_e( 'Show lowest/highest variation price instead of price range.', 'show-product-variations-for-woocommerce' ); ?>
 								</small>
 							</th>
 							<td>
@@ -362,14 +362,14 @@ class Wsv_Admin {
 											echo ( ( 'lowest' === $wsv_show_vari_lh_price ) ? 'selected' : '' );
 										?>
 										>
-										<?php esc_attr_e( 'Lowest', 'wsv' ); ?>
+										<?php esc_attr_e( 'Lowest', 'show-product-variations-for-woocommerce' ); ?>
 									</option>
 									<option value="highest" 
 										<?php
 											echo ( ( 'highest' === $wsv_show_vari_lh_price ) ? 'selected' : '' );
 										?>
 										>
-										<?php esc_html_e( 'Highest', 'wsv' ); ?>
+										<?php esc_html_e( 'Highest', 'show-product-variations-for-woocommerce' ); ?>
 									</option>
 								</select>
 								</div>
@@ -394,17 +394,17 @@ class Wsv_Admin {
 		}
 		?>
 		<div class="wrap">
-			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php esc_html_e( 'Wc Show Variation Settings', 'wsv' ); ?></h1>
+			<h1 style="font-size: 23px; text-transform: uppercase; margin: 1em 0;"><?php esc_html_e( 'Wc Show Variation Settings', 'show-product-variations-for-woocommerce' ); ?></h1>
 			<div>
 				<p>
-					<?php printf( esc_html__( 'Thank you for using our plugin! Would you please show us a little love by rating us in the WordPress.org? %s ', 'wsv' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
+					<?php printf( esc_html__( 'Thank you for using our plugin! Would you please show us a little love by rating us in the WordPress.org? %s ', 'show-product-variations-for-woocommerce' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
 					<br/>
 					<a href="<?php echo esc_url( WSV_REVIEWS ); ?>"
-						target="_blank"><?php esc_html_e( 'Reviews', 'wsv' ); ?></a>
+						target="_blank"><?php esc_html_e( 'Reviews', 'show-product-variations-for-woocommerce' ); ?></a>
 				</p>
 			</div>
 			<h2 class="nav-tab-wrapper">
-				<a href="?page=wsv&tab=variations-options"  class="nav-tab <?php echo 'variations-options' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Single Variation Options', 'wsv' ); ?></a>
+				<a href="?page=wsv&tab=variations-options"  class="nav-tab <?php echo 'variations-options' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Single Variation Options', 'show-product-variations-for-woocommerce' ); ?></a>
 			</h2>
 				<?php
 				if ( 'variations-options' === $active_tab ) {
@@ -429,22 +429,22 @@ class Wsv_Admin {
 					woocommerce_wp_checkbox(
 						array(
 							'id'          => WSV_EXCEPT_SING_VARI,
-							'label'       => __( 'Exclude Single Variation', 'wsv' ),
-							'description' => __( 'This option will exclude single variation on shop & category pages.', 'wsv' ),
+							'label'       => __( 'Exclude Single Variation', 'show-product-variations-for-woocommerce' ),
+							'description' => __( 'This option will exclude single variation on shop & category pages.', 'show-product-variations-for-woocommerce' ),
 						)
 					);
 					woocommerce_wp_checkbox(
 						array(
 							'id'          => WSV_EXC_PROD_PAR,
-							'label'       => __( 'Hide Parent Variable Product', 'wsv' ),
-							'description' => __( 'Enable this option to Hide parent variation on shop & category pages.<br/><strong>Note: this option will be not work for Show Variations Dropdown</strong>', 'wsv' ),
+							'label'       => __( 'Hide Parent Variable Product', 'show-product-variations-for-woocommerce' ),
+							'description' => __( 'Enable this option to Hide parent variation on shop & category pages.<br/><strong>Note: this option will be not work for Show Variations Dropdown</strong>', 'show-product-variations-for-woocommerce' ),
 						)
 					);
 					woocommerce_wp_checkbox(
 						array(
 							'id'          => WSV_EXC_PROD_TABLE,
-							'label'       => __( 'Hide Variations Table', 'wsv' ),
-							'description' => __( 'Enable this option to Hide variations table on this product page.', 'wsv' ),
+							'label'       => __( 'Hide Variations Table', 'show-product-variations-for-woocommerce' ),
+							'description' => __( 'Enable this option to Hide variations table on this product page.', 'show-product-variations-for-woocommerce' ),
 						)
 					);
 				?>
@@ -457,7 +457,7 @@ class Wsv_Admin {
 			return;
 		}
 		$tabs['wsv_tab'] = array(
-			'label'  => __( 'Show Variations', 'wsv' ),
+			'label'  => __( 'Show Variations', 'show-product-variations-for-woocommerce' ),
 			'target' => 'wsv_tab_content',
 			'class'  => array(),
 		);
@@ -538,10 +538,10 @@ class Wsv_Admin {
 			array(
 				'id'            => 'wsv_custom_name[' . $variation_post->ID . ']',
 				'name'          => 'wsv_custom_name[' . $variation_post->ID . ']',
-				'label'         => __( 'Custom Name(' . WSV_PLUGIN_NAME . ' ) ', 'wsv' ),
+				'label'         => __( 'Custom Name(' . WSV_PLUGIN_NAME . ' ) ', 'show-product-variations-for-woocommerce' ),
 				'value'         => get_post_meta( $variation_post->ID, 'wsv_custom_name', true ),
 				'desc_tip'      => true,
-				'description'   => __( 'Add custom name for this variation', 'wsv' ),
+				'description'   => __( 'Add custom name for this variation', 'show-product-variations-for-woocommerce' ),
 				'type'          => 'text',
 				'wrapper_class' => 'form-row form-row-full',
 			)
@@ -551,7 +551,7 @@ class Wsv_Admin {
 			array( // Checkbox.
 				'id'          => 'wsv_hide_variation[' . $variation_post->ID . ']',
 				'name'        => 'wsv_hide_variation[' . $variation_post->ID . ']',
-				'label'       => __( 'Hide this variation(' . WSV_PLUGIN_NAME . ' ) ', 'wsv' ),
+				'label'       => __( 'Hide this variation(' . WSV_PLUGIN_NAME . ' ) ', 'show-product-variations-for-woocommerce' ),
 				'value'       => get_post_meta( $variation_post->ID, WSV_HIDE_VARIATION, true ),
 				'description' => __( 'Enable this will hide variation on shop and categorie page.', 'woocommerce' ),
 				'desc_tip'    => true,
