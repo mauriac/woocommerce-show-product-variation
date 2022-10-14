@@ -173,13 +173,13 @@ class Wsv_Admin {
 		);
 		$product_categories = get_terms( $args );
 
-		$wsv_show_vari_on_shop_cat        = get_option( 'wsv_show_vari_on_shop_cat' );
-		$wsv_show_vari_on_shortcode       = get_option( 'wsv_show_vari_on_shortcode' );
-		$wsv_hide_parent_product_variable = get_option( 'wsv_hide_parent_product_variable' );
-		$wsv_excludes_category            = get_option( 'wsv_excludes_category' );
-		$wsv_excludes_attributes          = get_option( 'wsv_excludes_attributes' );
-		$wsv_show_vari_keep_first         = get_option( 'wsv_show_vari_keep_first' );
-		$wsv_show_vari_lh_price           = get_option( 'wsv_show_vari_lh_price' );
+		$wsv_show_vari_on_shop_cat        = get_option('wsv_show_vari_on_shop_cat') ?: '';
+		$wsv_show_vari_on_shortcode       = get_option('wsv_show_vari_on_shortcode') ?: '';
+		$wsv_hide_parent_product_variable = get_option('wsv_hide_parent_product_variable') ?: '';
+		$wsv_excludes_category            = get_option('wsv_excludes_category') ?: [];
+		$wsv_excludes_attributes          = get_option('wsv_excludes_attributes') ?: [];
+		$wsv_show_vari_keep_first         = get_option('wsv_show_vari_keep_first') ?: '';
+		$wsv_show_vari_lh_price           = get_option('wsv_show_vari_lh_price') ?: '';
 		?>
 		<div class="wrap">
 			<form method="POST">
