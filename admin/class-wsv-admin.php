@@ -262,15 +262,15 @@ class Wsv_Admin {
 							</th>
 							<td>
 								<select multiple name="wsv-settings[wsv_excludes_category][]">
-									<?php foreach ( $product_categories as $WP_Term ) : ?>
+									<?php foreach ( $product_categories as $wp_term ) : ?>
 										<?php
-											$value    = $WP_Term->term_id;
+											$value    = $wp_term->term_id;
 											$selected = '';
 										if ( in_array( $value, $wsv_excludes_category, true ) ) {
 											$selected = 'selected';
 										}
 										?>
-										<option value="<?php echo $value; ?>" <?php echo $selected; ?> ><?php echo $WP_Term->name; ?></option>
+										<option value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $selected ); ?> ><?php echo esc_attr( $wp_term->name ); ?></option>
 									<?php endforeach; ?>
 								</select>
 							</td>
@@ -296,7 +296,7 @@ class Wsv_Admin {
 											$selected = 'selected';
 										}
 										?>
-										<option value="<?php echo $value; ?>" <?php echo $selected; ?> ><?php echo $value; ?></option>
+										<option value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $selected ); ?> ><?php echo esc_attr( $value ); ?></option>
 										<?php
 									}
 									?>
@@ -388,7 +388,7 @@ class Wsv_Admin {
 		?>
 		<?php
 		if ( isset( $_GET['tab'] ) ) {
-			$active_tab = $_GET['tab'];
+			$active_tab = filter_input( INPUT_GET, 'tab' );
 		} else {
 			$active_tab = 'variations-options';
 		}
