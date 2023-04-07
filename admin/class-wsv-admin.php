@@ -221,7 +221,7 @@ class Wsv_Admin {
 						<div class="col-auto my-1">
 							<th scope="row">
 								<strong>
-									<?php esc_attr_e( 'Show variations in shortcodes', 'show-product-variations-for-woocommerce' ); ?>
+									<?php esc_html_e( 'Show variations in shortcodes', 'show-product-variations-for-woocommerce' ); ?>
 								</strong>
 							</th>
 							<td>
