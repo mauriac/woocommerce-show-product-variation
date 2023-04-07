@@ -176,8 +176,8 @@ class Wsv_Admin {
 		$wsv_show_vari_on_shop_cat        = get_option( 'wsv_show_vari_on_shop_cat' );
 		$wsv_show_vari_on_shortcode       = get_option( 'wsv_show_vari_on_shortcode' );
 		$wsv_hide_parent_product_variable = get_option( 'wsv_hide_parent_product_variable' );
-		$wsv_excludes_category            = get_option( 'wsv_excludes_category' );
-		$wsv_excludes_attributes          = get_option( 'wsv_excludes_attributes' );
+		$wsv_excludes_category            = (array) get_option( 'wsv_excludes_category', array() );
+		$wsv_excludes_attributes          = (array) get_option( 'wsv_excludes_attributes', array() );
 		$wsv_show_vari_keep_first         = get_option( 'wsv_show_vari_keep_first' );
 		$wsv_show_vari_lh_price           = get_option( 'wsv_show_vari_lh_price' );
 		?>
@@ -266,7 +266,7 @@ class Wsv_Admin {
 										<?php
 											$value    = $WP_Term->term_id;
 											$selected = '';
-										if ( in_array( $value, $wsv_excludes_category ) ) {
+										if ( in_array( $value, $wsv_excludes_category, true ) ) {
 											$selected = 'selected';
 										}
 										?>
@@ -292,7 +292,7 @@ class Wsv_Admin {
 									<?php
 									foreach ( $attributes_values as $value ) {
 										$selected = '';
-										if ( in_array( $value, $wsv_excludes_attributes ) ) {
+										if ( is_array( $wsv_excludes_category ) && in_array( $value, $wsv_excludes_attributes, true ) ) {
 											$selected = 'selected';
 										}
 										?>

@@ -120,8 +120,9 @@ class Wsv_Public {
 			$q->set( 'post_type', array( 'product', 'product_variation' ) );
 			$wsv_exc_vari             = get_option( WSV_EXCEPT_SING_VARI );
 			$wsv_exc_vari             = is_array( $wsv_exc_vari ) ? $wsv_exc_vari : array();
-			$wsv_excludes_attributes  = get_option( 'wsv_excludes_attributes' );
+			$wsv_excludes_attributes  = (array) get_option( 'wsv_excludes_attributes', array() );
 			$wsv_show_vari_keep_first = get_option( 'wsv_show_vari_keep_first' );
+			$excl_vari                = array();
 
 			$wsv_excludes_category = get_option( 'wsv_excludes_category' );
 			if ( is_array( $wsv_excludes_category ) ) {
@@ -139,7 +140,6 @@ class Wsv_Public {
 					)
 				);
 
-				$excl_vari = array();
 				if ( is_array( $variable_list_by_cat ) ) {
 					foreach ( $variable_list_by_cat as $variable ) {
 						$excl_vari = array_merge( $excl_vari, $variable->get_children() );
